@@ -1,6 +1,6 @@
 module.exports = {
     host:'localhost',
     user: 'root',
-    password:'localpassword',
-    database:'localdatabase'
+    password:'20200128!!',
+    database:'gooddrive'
 }
