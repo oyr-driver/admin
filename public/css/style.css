@@ -19,6 +19,7 @@ body{
     background-color: #fff;
     box-shadow: 1px 1px 10px #888888;
     width: 40rem;
+    height: 40rem;
 }
 
 .wrap .pic_content{
@@ -78,7 +79,7 @@ body{
     box-sizing: border-box;
     /* background: #fff;
     border: 2px solid #eee; */
-    margin:1rem;
+    margin: 5rem 1rem 1rem;
 
 }
 
@@ -114,7 +115,7 @@ body{
 .wrap .container .inner .form{
     display: block;
     justify-content: center;
-    margin-top: 10%;
+    margin-top: 5%;
 }
 
 .wrap .container .inner .form .input_box .form_label{
@@ -128,7 +129,7 @@ body{
 .wrap .container .inner .form .input_box{
     padding: 0 1rem;
 }
-.wrap .container .inner .form .input_box #user,#password,#id{
+.wrap .container .inner .form .input_box #user,#password,#id,#cpID,#conNm{
     margin-top: 0.3rem;
     margin-bottom: 1%;
     width:90%;
@@ -137,7 +138,7 @@ body{
     border-radius: 0.4rem;
 }
 .wrap .container .inner .form .button_box {
-    margin:1rem 0;
+    margin:1rem;
     padding:0 1rem;
     
 }
@@ -200,7 +201,7 @@ body{
 
 /*footer*/
 footer{
-    margin-top: 200px;
+    margin-top: 150px;
 }
 footer .footer_container {
     display: flex;
