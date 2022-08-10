@@ -554,15 +554,15 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                                <% for(var i = 1; i < 3; i++){ %>
+                                                <% g-consultant.forEach(function (value) { %>
                                             <tr onclick="getEdit()">
-                                                <th scope="row"> <%= i %></th>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
+                                                <th scope="row"> <%= ++i %></th>
+                                                <td><%= value.conID %></td>
+                                                <td><%= value.conNM %></td>
+                                                <td><%= value.authCD %></td>
+                                                <td><%= value.cpID %></td>
                                             </tr>
-                                                <% } %>
+                                                <% }); %>
                                             </tbody>
                                         </table>
                                     </div>

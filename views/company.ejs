@@ -553,14 +553,14 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                                <% for(var i = 1; i < 3; i++){ %>
+                                                <% company.forEach(function (value){ %>
                                             <tr onclick="getEdit()">
-                                                <th scope="row"> <%= i %></th>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>Mark</td>
+                                                <th scope="row"></th>
+                                                <td><%= value.cpID %></td>
+                                                <td><%= value.cpNM %></td>
+                                                <td><%= value.cpPhone %></td>
                                             </tr>
-                                                <% } %>
+                                                <% }); %>
                                             </tbody>
                                         </table>
                                     </div>

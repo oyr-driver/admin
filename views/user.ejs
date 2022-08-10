@@ -554,15 +554,16 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                                <% for(var i = 1; i < 3; i++){ %>
+                                                <% user.forEach(function (value){ %>
                                             <tr onclick="getEdit()">
-                                                <th scope="row"> <%= i %></th>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
+                                                <th scope="row"> </th>
+                                                <td> <%= value.userID %></td>
+                                                <td> <%= value.userNM %></td>
+                                                <td> <%= value.phone %></td>
+                                                <td> <%= value.cpID %></td>
+                                                <td> <%= value.addDate %></td>
                                             </tr>
-                                                <% } %>
+                                                <% }); %>
                                             </tbody>
                                         </table>
                                     </div>

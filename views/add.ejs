@@ -62,28 +62,31 @@
                     </div>
                     
                     <form method="post" action="/create" class="form" style="margin-top: 2rem;">
+                        <!-- <div class="input_box">
+                            <label class="form_label" for=""><span style="color: #4268F6;">*</span>name</label>
+                            <input name="name" id="conNm" type="text" placeholder="username"/>
+                        </div> -->
                         <div class="input_box">
                             <label class="form_label" for=""><span style="color: #4268F6;">*</span>name</label>
-                            <input name="user" id="conNm" type="text" placeholder="username"/>
+                            <input name="conNM" id="user" type="text" placeholder="name"/>
                         </div>
+
                         <div class="input_box">
-                            <label class="form_label" for=""><span style="color: #4268F6;">*</span>email</label>
-                            <input name="user" id="user" type="text" placeholder="email"/>
+                            <label class="form_label" for=""><span style="color: #4268F6;">*</span>id</label>
+                            <input name="conID" id="user" type="text" placeholder="id"/>
                         </div>
                         <div class="input_box">
                             <label for="" class="form_label"><span style="color: #4268F6;">*</span>password</label>
-                            <input name="password" id="password" type="password" placeholder="Password">
+                            <input name="conPW" id="password" type="password" placeholder="Password">
                         </div>
                         <div class="input_box">
                             <label for="" class="form_label"><span style="color: #4268F6;">*</span>companyID</label>
-                            <input name="password" id="cpID" type="text" placeholder="companyID">
-                        </div>
-                        <!-- <div class="input_box">
-                            <input type="text" id="id" name="name" placeholder="name">
+                            <input name="cpID" id="cpID" type="text" placeholder="companyID">
                         </div>
                         <div class="input_box">
-                            <input type="text" id="password" name="email" placeholder="Phone number, username, or email">
-                        </div> -->
+                            <label for="" class="form_label"><span style="color: #4268F6;">*</span>authority</label>
+                            <input name="authCD" id="user" type="text" value="3">
+                        </div>
                         <div class="button_box">
                             <input type="submit" value="회원가입" name="" value="가입">
                         </div>
