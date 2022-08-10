@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -8,4 +5,70 @@ generator client {
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
+}
+
+model g_auth {
+  code         Int            @id @default(autoincrement())
+  cdNM         String?        @db.VarChar(45)
+  g_consultant g_consultant[]
+
+  @@map("g-auth")
+}
+
+model g_call {
+  callID       Int          @id @default(autoincrement())
+  userID       String       @db.VarChar(45)
+  cPhone       String       @db.VarChar(45)
+  sLat         String?      @db.VarChar(45)
+  sLong        String?      @db.VarChar(45)
+  sAddr        String       @db.VarChar(45)
+  eAddr        String       @db.VarChar(45)
+  status       String       @db.VarChar(45)
+  conID        Int
+  cpID         String       @db.VarChar(45)
+  addDate      DateTime     @default(now()) @db.DateTime(0)
+  g_consultant g_consultant @relation(fields: [conID], references: [conID], onDelete: NoAction, onUpdate: NoAction, map: "consultant-call")
+  g_company    g_company    @relation(fields: [cpID], references: [cpID], onDelete: NoAction, onUpdate: NoAction, map: "company-call")
+
+  @@index([cpID], map: "company-call_idx")
+  @@index([conID], map: "consultant-call_idx")
+  @@index([userID], map: "user-call_idx")
+  @@map("g-call")
+}
+
+model g_company {
+  cpID         String         @id @db.VarChar(45)
+  cpNM         String         @db.VarChar(45)
+  cpPhone      String         @db.VarChar(45)
+  g_call       g_call[]
+  g_consultant g_consultant[]
+  g_user       g_user[]
+
+  @@map("g-company")
+}
+
+model g_consultant {
+  conID     Int       @id @default(autoincrement())
+  conNM     String    @db.VarChar(45)
+  authCD    Int
+  cpID      String    @db.VarChar(45)
+  g_auth    g_auth    @relation(fields: [authCD], references: [code], onDelete: NoAction, onUpdate: NoAction, map: "auth-consultant")
+  g_company g_company @relation(fields: [cpID], references: [cpID], map: "company-consultant")
+  g_call    g_call[]
+
+  @@index([authCD], map: "auth-consultant_idx")
+  @@index([cpID], map: "company-consultant_idx")
+  @@map("g-consultant")
+}
+
+model g_user {
+  userID    String    @id @db.VarChar(45)
+  userNM    String    @db.VarChar(45)
+  phone     String    @db.VarChar(45)
+  cpID      String    @db.VarChar(45)
+  addDate   DateTime  @db.DateTime(0)
+  g_company g_company @relation(fields: [cpID], references: [cpID], map: "company-user")
+
+  @@index([cpID], map: "company-user_idx")
+  @@map("g-user")
 }
