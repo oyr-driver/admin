@@ -19,7 +19,7 @@ body{
     background-color: #fff;
     box-shadow: 1px 1px 10px #888888;
     width: 40rem;
-    height: 40rem;
+    height: 43rem;
 }
 
 .wrap .pic_content{
@@ -79,7 +79,7 @@ body{
     box-sizing: border-box;
     /* background: #fff;
     border: 2px solid #eee; */
-    margin: 5rem 1rem 1rem;
+    margin: 9rem 1rem 1rem;
 
 }
 
@@ -201,7 +201,7 @@ body{
 
 /*footer*/
 footer{
-    margin-top: 150px;
+    margin-top: 100px;
 }
 footer .footer_container {
     display: flex;
