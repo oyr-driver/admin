@@ -1,64 +1,49 @@
 const http = require('http');
 const express = require('express');
 const ejs = require('ejs');
+const boardRouter = require('./router/board.js');//require이용하여 모듈을 가지고 옴, 페이지 라우터
+const board_log_Router = require('./router/login_out.js');//로그인 라우터
+const bodyParser = require('body-parser');//body를 parsing해주는 미들웨어
+const expressSession=require('express-session');//session 사용할때 필요
+
+//mysql연동
+const mysql = require('mysql');
+const dbconfig = require('./config/database.js');//db router
+const connection = mysql.createConnection(dbconfig);
 
 const app = express();
 const server = http.createServer(app);
-
 const port = 5000;
 
+//view engine setup
 app.set('views','./views');
 app.set('view engine', 'ejs');
+
+//미들웨어 등록
+app.use(express.json());//req.body.user, req.body.pw 사용하기 위함 (body-parser)
+app.use(bodyParser.urlencoded({extended:false}));
 
 app.use(express.static("assets"));
 app.use(express.static("public"));
 
-app.get('/login', (req, res) => {
-  res.render('login');
-})
+//세션 세팅, 클라이언트와 서버 사이 세션 사용 위함
+app.use(expressSession({
+  secret:'my key',
+  resave:false, //세션 매번 다시 저장
+  saveUninitialized:false //아무 내용 없는 session 저장할 것인지
+}));
 
-app.get('/layout', (req, res) => {
-  // res.render('charts-chartjs');
-  res.render('forms-layouts');
-})
+//라우터 연결
+app.use(boardRouter);
+app.use(board_log_Router);
 
-app.post('/call', (req, res) => {
-  res.render('call');
-})
+connection.connect();
+// connection.query('SELECT * from user',(err,rows, fields)=>{
+//   if(err) throw err;
+//   console.log('user info is :',rows);
+// })
+connection.end();
 
-app.post('/auth', (req, res) => {
-  res.render('auth');
-})
-
-app.post('/user', (req, res) => {
-  res.render('user');
-})
-
-app.get('/call', (req, res) => {
-  res.render('call');
-})
-
-app.get('/auth', (req, res) => {
-  res.render('auth');
-})
-
-app.get('/user', (req, res) => {
-  res.render('user');
-})
-
-//회원가입 페이지로 이동
-app.get('/create',function(req,res){
-  res.sendFile(__dirname + "/views/create_user/add.html");
-})
-
-app.get('/logout',(req,res)=>{
-    console.log('로그아웃 성공');
-    // req.session.destroy(function(err){
-    //     res.redirect('/');
-    // });
-    res.redirect('/login');
-
-})
 server.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
 });

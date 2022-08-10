@@ -61,14 +61,22 @@
                         GOODDRIVE
                     </div>
                     
-                    <form method="post" action="/create" class="form" style="margin-top: 3rem;">
+                    <form method="post" action="/create" class="form" style="margin-top: 2rem;">
+                        <div class="input_box">
+                            <label class="form_label" for=""><span style="color: #4268F6;">*</span>name</label>
+                            <input name="user" id="conNm" type="text" placeholder="username"/>
+                        </div>
                         <div class="input_box">
                             <label class="form_label" for=""><span style="color: #4268F6;">*</span>email</label>
-                            <input name="user" id="user" type="text" placeholder="Phone number, username, or email"/>
+                            <input name="user" id="user" type="text" placeholder="email"/>
                         </div>
                         <div class="input_box">
                             <label for="" class="form_label"><span style="color: #4268F6;">*</span>password</label>
                             <input name="password" id="password" type="password" placeholder="Password">
+                        </div>
+                        <div class="input_box">
+                            <label for="" class="form_label"><span style="color: #4268F6;">*</span>companyID</label>
+                            <input name="password" id="cpID" type="text" placeholder="companyID">
                         </div>
                         <!-- <div class="input_box">
                             <input type="text" id="id" name="name" placeholder="name">
