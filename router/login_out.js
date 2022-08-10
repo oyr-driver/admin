@@ -11,6 +11,9 @@ router.get('/login', (req, res) => {
     res.render('login');
 });
 
+//board.js에 보낼 로그인 사용자 정보
+var a,b,c;
+
 //로그인
 router.post('/call', (req, res) => {
     const conID = req.body.conID;
@@ -27,7 +30,12 @@ router.post('/call', (req, res) => {
                     user_PW:pw,
                     user_CP: cpID 
                 };
-
+                
+                //14번에 있음
+                a = req.session.users.user_ID;
+                b = req.session.users.user_PW;
+                c = req.session.users.user_CP;
+                
                 console.log('로그인 성공');
                 console.log("id: "+req.session.users.user_ID + ", pw: "+ req.session.users.user_PW + ", cp: "+req.session.users.user_CP);
                 res.redirect('call');
@@ -44,6 +52,12 @@ router.post('/call', (req, res) => {
         })
     }
 })
+
+const login_user = {
+    con_id : a,
+    con_pw : b,
+    con_cp : c
+}
 
   //회원가입 페이지로 이동
 router.get('/create',function(req,res){
@@ -73,3 +87,4 @@ router.get('/logout',(req,res)=>{
 });
 
 module.exports = router;
+// export {login_user};//board.js로 정보 보냄

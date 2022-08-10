@@ -547,6 +547,7 @@
                                             <thead>
                                             <tr>
                                                 <th>#</th>
+                                                <th>callID</th>
                                                 <th>userID</th>
                                                 <th>cPhone</th>
                                                 <!-- <th>S Lat</th>
@@ -560,19 +561,20 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                                <% for(var i = 1; i < 10; i++){ %>
+                                                <% call.forEach(function(value){ %>
                                             <tr onclick="getEdit()">
-                                                <th scope="row"> <%= i %></th>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>@mdo</td>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>@mdo</td>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
+                                                <th scope="row"></th>
+                                                <td><%= value.callID %></td>
+                                                <td><%= value.userID %></td>
+                                                <td><%= value.cPhone %></td>
+                                                <td><%= value.sAddr %></td>
+                                                <td><%= value.eAddr %></td>
+                                                <td><%= value.status %></td>
+                                                <td><%= value.conID %></td>
+                                                <td><%= value.cpID %></td>
+                                                <td><%= value.addDate %></td>
                                             </tr>
-                                                <% } %>
+                                                <% }); %>
                                             </tbody>
                                         </table>
                                     </div>

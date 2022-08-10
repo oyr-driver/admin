@@ -7,16 +7,15 @@ const mysql = require('mysql');
 const dbconfig = require('../config/database.js');//db router
 const connection = mysql.createConnection(dbconfig);
 
+// import {login_user} from "./login_out.js";
+
+
+
 //body-parser이용
 // router.post('/call',function(req,res){
 //   var user = req.body.user;
 //   console.log(user);
 //   res.send(user);
-// })
-
-//post
-// router.post('/call', (req, res) => {
-//     res.render('call');
 // })
 
 router.post('/auth', (req, res) => {
@@ -47,18 +46,28 @@ router.post('/company/user', (req, res) => {
 
 //get
 router.get('/call', (req, res) => {
-    res.render('call');
+    const sql = "SELECT * FROM g_call";
+    connection.query(sql,(err, result,field)=>{
+        if(err) throw err;
+        // console.log(result);
+        res.render('call',{call:result});        
+    });
 });
 
 router.get('/auth', (req, res) => {
-    res.render('auth');
+    const sql = "SELECT * FROM g_auth";
+    connection.query(sql,(err, result,field)=>{
+        if(err) throw err;
+        // console.log(result);
+        res.render('auth',{auth:result});        
+    });
 })
 
 router.get('/company/com', (req, res) => {
     const sql = "SELECT * FROM g_company";
     connection.query(sql,(err, result,field)=>{
         if(err) throw err;
-        console.log(result);
+        // console.log(result);
         res.render('company',{company:result});        
     });
 
@@ -69,13 +78,18 @@ router.get('/company/user', (req, res) => {
     const sql = "SELECT * FROM g_user";
     connection.query(sql,(err, result,field)=>{
         if(err) throw err;
-        console.log(result);
+        // console.log(result);
         res.render('user',{user:result});        
     });
 })
 
 router.get('/company/cons', (req, res) => {
-    res.render('consultant');
+    const sql = "SELECT * FROM g_consultant";
+    connection.query(sql,(err, result,field)=>{
+        if(err) throw err;
+        // console.log(result);
+        res.render('consultant',{consultant:result});        
+    });
 })
 
 module.exports = router;

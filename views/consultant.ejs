@@ -542,23 +542,25 @@
                         <div class="row" style="display: flex; justify-content: center; align-items: center;">
                             <div class="col-lg-6">
                                 <div class="main-card mb-3 card">
-                                    <div class="card-body"><h5 class="card-title">All the calls</h5>
+                                    <div class="card-body"><h5 class="card-title">All THE CONSULTANT</h5>
                                         <table class="mb-0 table table-hover">
                                             <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>conID</th>
                                                 <th>conNM</th>
+                                                <th>conID</th>
+                                                <th>conPW</th>
                                                 <th>authCD(권한)</th>
                                                 <th>cpID</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                                <% g-consultant.forEach(function (value) { %>
+                                                <% consultant.forEach(function (value) { %>
                                             <tr onclick="getEdit()">
-                                                <th scope="row"> <%= ++i %></th>
-                                                <td><%= value.conID %></td>
+                                                <th scope="row"></th>
                                                 <td><%= value.conNM %></td>
+                                                <td><%= value.conID %></td>
+                                                <td><%= value.conPW %></td>
                                                 <td><%= value.authCD %></td>
                                                 <td><%= value.cpID %></td>
                                             </tr>
