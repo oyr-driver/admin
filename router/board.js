@@ -72,12 +72,18 @@ router.get('/auth', (req, res) => {
     });
 })
 
+let a;
 router.get('/company/com', (req, res) => {
     const sql = "SELECT * FROM g_company";
     connection.query(sql,(err, result,field)=>{
         if(err) throw err;
         // console.log(result);
-        res.render('company',{accessor : user, company:result});        
+        a =result;
+        res.render('company',{
+            accessor : user, 
+            company:result,
+            status: "hi",
+        });        
     });
 })
 
@@ -90,6 +96,21 @@ router.post('/company/com',(req,res)=>{
         res.redirect('/company/com');
     })
 })
+
+router.get('/company/com/:id',(req,res)=>{
+    const sql = "SELECT* FROM g_company WHERE cpID = ?";
+    connection.query(sql, [req.params.id], function(err,result,fields){
+        if(err) throw err;
+        console.log(req.params.id);
+        res.render('company',{
+            company:a,
+            accessor : user,
+            com_data: result,
+            status:"by"
+        });
+    });
+});
+
 
 router.get('/company/user', (req, res) => {
     const sql = "SELECT * FROM g_user";
