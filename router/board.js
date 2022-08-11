@@ -10,39 +10,6 @@ const connection = mysql.createConnection(dbconfig);
 //고객 정보
 var user={};
 
-//body-parser이용
-// router.post('/call',function(req,res){
-//   var user = req.body.user;
-//   console.log(user);
-//   res.send(user);
-// })
-
-router.post('/auth', (req, res) => {
-    res.render('auth');
-})
-
-// router.post('/company/com', (req, res) => {
-//     res.render('company');
-// })
-
-router.post('/company/cons', (req, res) => {
-    res.render('consultant');
-})
-
-//상담원 삭제 기능 구현
-router.get('/company/cons/delete/:id',(req,res)=>{
-    const sql = "DELETE FROM g_consultant WHERE conID = ?";
-    connection.query(sql,[req.params.conID],(err, result, field)=>{
-        if(err) throw err;
-        console.log(result);
-        res.redirect('/company/cons');
-    })
-})
-
-router.post('/company/user', (req, res) => {
-    res.render('user');
-})
-
 //get
 router.get('/call', (req, res) => {
     const sql = "SELECT * FROM g_call";
@@ -81,6 +48,8 @@ router.get('/call/:id',(req,res)=>{
         });
     });
 });
+
+//auth 데이터 불러오기
 router.get('/auth', (req, res) => {
     const sql = "SELECT * FROM g_auth";
     connection.query(sql,(err, result,field)=>{
@@ -90,13 +59,14 @@ router.get('/auth', (req, res) => {
     });
 })
 
-let a;
+//company
+let com_d; //accerssor
 router.get('/company/com', (req, res) => {
     const sql = "SELECT * FROM g_company";
     connection.query(sql,(err, result,field)=>{
         if(err) throw err;
         // console.log(result);
-        a =result;
+        com_d =result;
         res.render('company',{
             accessor : user, 
             company:result,
@@ -105,7 +75,7 @@ router.get('/company/com', (req, res) => {
     });
 })
 
-//company 추가
+//-company 추가
 router.post('/company/com',(req,res)=>{
     const sql = "INSERT INTO g_company SET ?"
     connection.query(sql,req.body, (err,result,fields)=>{
@@ -115,14 +85,14 @@ router.post('/company/com',(req,res)=>{
     })
 })
 
-//edit파일로 이동
+//-edit파일로 이동
 router.get('/company/com/:id',(req,res)=>{
     const sql = "SELECT* FROM g_company WHERE cpID = ?";
     connection.query(sql, [req.params.id], function(err,result,fields){
         if(err) throw err;
         console.log(req.params.id);
         res.render('company',{
-            company:a,
+            company:com_d,
             accessor : user,
             com_data: result,
             status:"by"
@@ -130,7 +100,7 @@ router.get('/company/com/:id',(req,res)=>{
     });
 });
 
-//company 수정
+//-company 수정
 router.post('/company/com/update/:id',(req,res)=>{
     const sql = "UPDATE g_company SET ? WHERE cpID = ?";
     connection.query(sql,[req.body, req.params.id],(err,result,fields)=>{
@@ -139,7 +109,7 @@ router.post('/company/com/update/:id',(req,res)=>{
     })
 })
 
-//company 삭제
+//-company 삭제
 router.get('/company/com/delete/:id',(req,res)=>{
     const sql = "DELETE FROM g_company WHERE cpID = ?";
     connection.query(sql,[req.params.id],(err,result,fields)=>{
@@ -148,12 +118,14 @@ router.get('/company/com/delete/:id',(req,res)=>{
     })
 })
 
+//user
+let user_d; //accerssor
 router.get('/company/user', (req, res) => {
     const sql = "SELECT * FROM g_user";
     connection.query(sql,(err, result,field)=>{
         if(err) throw err;
         // console.log(result);
-        a =result;
+        user_d =result;
         res.render('user',{
             accessor : user, 
             user:result,
@@ -162,13 +134,24 @@ router.get('/company/user', (req, res) => {
     });
 })
 
+//-user 추가
+router.post('/company/user',(req,res)=>{
+    const sql = "INSERT INTO g_user SET ?"
+    connection.query(sql,req.body, (err,result,fields)=>{
+        if(err) throw err;
+        console.log(result);
+        res.redirect('/company/user');
+    })
+})
+
+//-user 불러오기??
 router.get('/company/user/:id',(req,res)=>{
     const sql = "SELECT* FROM g_user WHERE userID = ?";
     connection.query(sql, [req.params.id], function(err,result,fields){
         if(err) throw err;
         console.log(req.params.id);
         res.render('user',{
-            user:a,
+            user:user_d,
             accessor : user,
             user_data: result,
             status:"by"
@@ -176,12 +159,32 @@ router.get('/company/user/:id',(req,res)=>{
     });
 });
 
+//-user 수정
+router.post('/company/user/update/:id',(req,res)=>{
+    const sql = "UPDATE g_user SET ? WHERE userID = ?";
+    connection.query(sql,[req.body, req.params.id],(err,result,fields)=>{
+        if(err) throw err;
+        res.redirect('/company/user');
+    })
+})
+
+//-user 삭제
+router.get('/company/user/delete/:id',(req,res)=>{
+    const sql = "DELETE FROM g_user WHERE userID = ?";
+    connection.query(sql,[req.params.id],(err,result,fields)=>{
+        if(err) throw err;
+        res.redirect('/company/user');
+    })
+})
+
+//consultant
+let cons_d;//accessor
 router.get('/company/cons', (req, res) => {
     const sql = "SELECT * FROM g_consultant";
     connection.query(sql,(err, result,field)=>{
         if(err) throw err;
         // console.log(result);
-        a =result;
+        cons_d =result;
         res.render('consultant',{
             accessor : user, 
             consultant:result,
@@ -190,17 +193,49 @@ router.get('/company/cons', (req, res) => {
     });
 })
 
+//-company 추가
+router.post('/company/cons',(req,res)=>{
+    const sql = "INSERT INTO g_consultant SET ?"
+    connection.query(sql,req.body, (err,result,fields)=>{
+        if(err) throw err;
+        console.log(result);
+        res.redirect('/company/cons');
+    })
+})
+
+//-consultant 불러오기??
 router.get('/company/cons/:id',(req,res)=>{
     const sql = "SELECT* FROM g_consultant WHERE conID = ?";
     connection.query(sql, [req.params.id], function(err,result,fields){
         if(err) throw err;
         console.log(req.params.id);
         res.render('consultant',{
-            consultant:a,
+            consultant:cons_d,
             accessor : user,
             cons_data: result,
             status:"by"
         });
     });
 });
+
+//-consultant 수정
+router.post('/company/cons/update/:id',(req,res)=>{
+    const sql = "UPDATE g_consultant SET ? WHERE conID = ?";
+    connection.query(sql,[req.body, req.params.id],(err,result,fields)=>{
+        if(err) throw err;
+        res.redirect('/company/cons');
+    })
+})
+
+//-consultant 삭제
+router.get('/company/cons/delete/:id',(req,res)=>{
+    const sql = "DELETE FROM g_consultant WHERE conID = ?";
+    connection.query(sql,[req.params.id],(err,result,fields)=>{
+        if(err) throw err;
+        res.redirect('/company/cons');
+    })
+})
+
+
+
 module.exports = router;

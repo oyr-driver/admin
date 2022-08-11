@@ -598,23 +598,28 @@
                                         </div>
                                         <form class="" action="/company/cons" method="post" >
                                             <div class="position-relative form-group">
-                                                <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>conID</label>
-                                                <input name="email" id="exampleEmail11"  type="email" class="form-control">
+                                                <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>conNM</label>
+                                                <input name="conNM" id="exampleEmail11"  type="text" class="form-control">
                                             </div>
                                             <div class="position-relative form-group">
-                                                <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>conNM</label>
-                                                <input name="email" id="exampleEmail11"  type="email" class="form-control">
+                                                <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>conID</label>
+                                                <input name="conID" id="exampleEmail11"  type="text" class="form-control">
+                                            </div>
+                                            <div class="position-relative form-group">
+                                                <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>conPW</label>
+                                                <input name="conPW" id="exampleEmail11"  type="text" class="form-control">
                                             </div>
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class="">authCD</label>
-                                                <select name="select" id="exampleSelect" class="form-control">
-                                                    <option value="">3</option>
+                                                <select name="authCD" id="exampleSelect" class="form-control">
+                                                    <option  value="3">3</option>
                                                 </select>
                                             </div>
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>cpID</label>
-                                                <input name="email" id="exampleEmail11"  type="email" class="form-control">
+                                                <input name="cpID" id="exampleEmail11"  type="text" class="form-control">
                                             </div>
+                                            
                                             <div class="position-relative row form-check">
                                                 <div class="col-sm-10 offset-sm-2">
                                                     <button class="btn btn-secondary" style="width:440px; float:right;" onclick="getHide()">Submit</button>
@@ -638,36 +643,42 @@
                                             </button>
                                             <h5 class="card-title" style="font-size: 1.5rem; margin-top: 5px;">Edit</h5>
                                         </div>
-                                        <form class="" action="/company/cons" method="post" >
-                                            <div class="position-relative form-group">
-                                                <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>conID</label>
-                                                <input name="email" id="exampleEmail11"  type="email" class="form-control" value="<%= cons_data[0].conID %>">
-                                            </div>
+                                        <form class="" action="/company/cons/update/<%= cons_data[0].conID %>" method="post" >
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>conNM</label>
-                                                <input name="email" id="exampleEmail11"  type="email" class="form-control" value="<%= cons_data[0].conNM %>">
+                                                <input name="conNM" id="exampleEmail11"  type="text" class="form-control" value="<%= cons_data[0].conNM %>">
+                                            </div>
+                                            <div class="position-relative form-group">
+                                                <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>conID</label>
+                                                <input name="conID" id="exampleEmail11"  type="text" class="form-control" value="<%= cons_data[0].conID %>">
+                                            </div>
+                                            <div class="position-relative form-group">
+                                                <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>conPW</label>
+                                                <input name="conPW" id="exampleEmail11"  type="text" class="form-control" value="<%= cons_data[0].conPW %>">
                                             </div>
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class="">authCD</label>
-                                                <select name="select" id="exampleSelect" class="form-control" value="<%= cons_data[0].authCD %>">
-                                                    <option value="">3</option>
+                                                <select name="authCD" id="exampleSelect" class="form-control" >
+                                                    <option value="<%= cons_data[0].authCD %>">3</option>
                                                 </select>
                                             </div>
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>cpID</label>
-                                                <input name="email" id="exampleEmail11"  type="email" class="form-control" value="<%= cons_data[0].cpID %>">
+                                                <input name="cpID" id="exampleEmail11"  type="text" class="form-control" value="<%= cons_data[0].cpID %>">
                                             </div>
                                             <div class="position-relative row form-check">
                                                 <div class="col-sm-10 offset-sm-2">
                                                     <button class="btn btn-secondary" style="width:440px; float:right;" onclick="getSave()">Submit</button>
                                                 </div>
                                             </div>
-                                            <div class="position-relative row form-check">
-                                                <div class="col-sm-10 offset-sm-2">
-                                                    <button class="btn btn-danger" style="width:440px; float:right;">Delete</button>
-                                                </div>
-                                            </div>
                                         </form>
+                                        <div class="position-relative row form-check">
+                                            <div class="col-sm-10 offset-sm-2">
+                                                <button class="btn btn-danger" style="width:440px; float:right;" onclick="location.href='/company/cons/delete/<%= cons_data[0].conID %>'">
+                                                    Delete
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
