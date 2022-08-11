@@ -598,19 +598,19 @@
                                         <form class="" action="/company/user" method="post" >
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class="">userID</label>
-                                                <input name="email" id="exampleEmail11"  type="email" class="form-control">
+                                                <input name="userID" id="exampleEmail11"  type="text" class="form-control">
                                             </div>
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class="">userNM</label>
-                                                <input name="email" id="exampleEmail11"  type="email" class="form-control">
+                                                <input name="userNM" id="exampleEmail11"  type="text" class="form-control">
                                             </div>
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class="">phone</label>
-                                                <input name="email" id="exampleEmail11"  type="email" class="form-control">
+                                                <input name="phone" id="exampleEmail11"  type="text" class="form-control">
                                             </div>
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class="">cpID</label>
-                                                <input name="email" id="exampleEmail11"  type="email" class="form-control">
+                                                <input name="cpID" id="exampleEmail11"  type="text" class="form-control">
                                             </div>
                                             <div class="position-relative row form-check">
                                                 <div class="col-sm-10 offset-sm-2">
@@ -635,34 +635,34 @@
                                             </button>
                                             <h5 class="card-title" style="font-size: 1.5rem; margin-top: 5px;">Edit</h5>
                                         </div>
-                                        <form class="" action="/company/user" method="post" >
+                                        <form class="" action="/company/user/update/<%= user_data[0].userID %>" method="post" >
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class="">userID</label>
-                                                <input name="email" id="exampleEmail11"  type="email" class="form-control"  value="<%= user_data[0].userID %>">
+                                                <input name="userID" id="exampleEmail11"  type="text" class="form-control"  value="<%= user_data[0].userID %>">
                                             </div>
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class="">userNM</label>
-                                                <input name="email" id="exampleEmail11"  type="email" class="form-control"  value="<%= user_data[0].userNM %>">
+                                                <input name="userNM" id="exampleEmail11"  type="text" class="form-control"  value="<%= user_data[0].userNM %>">
                                             </div>
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class="">phone</label>
-                                                <input name="email" id="exampleEmail11"  type="email" class="form-control" value="<%= user_data[0].phone %>">
+                                                <input name="phone" id="exampleEmail11"  type="text" class="form-control" value="<%= user_data[0].phone %>">
                                             </div>
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class="">cpID</label>
-                                                <input name="email" id="exampleEmail11"  type="email" class="form-control" value="<%= user_data[0].cpID %>">
+                                                <input name="cpID" id="exampleEmail11"  type="text" class="form-control" value="<%= user_data[0].cpID %>">
                                             </div>
                                             <div class="position-relative row form-check">
                                                 <div class="col-sm-10 offset-sm-2">
                                                     <button class="btn btn-secondary" style="width:440px; float:right;" onclick="getSave()">Submit</button>
                                                 </div>
                                             </div>
-                                            <div class="position-relative row form-check">
-                                                <div class="col-sm-10 offset-sm-2">
-                                                    <button class="btn btn-danger" style="width:440px; float:right;">Delete</button>
-                                                </div>
-                                            </div>
                                         </form>
+                                        <div class="position-relative row form-check">
+                                            <div class="col-sm-10 offset-sm-2">
+                                                <button class="btn btn-danger" style="width:440px; float:right;" onclick="location.href='/company/user/delete/<%= user_data[0].userID %>'">Delete</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
