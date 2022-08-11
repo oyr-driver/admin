@@ -10,8 +10,12 @@
     /* display:none;  */
     z-index: 1;
     width: 30rem;
-    right: -30rem; /* 왼쪽에 파묻기 */
+    right: -32rem; /* 왼쪽에 파묻기 */
 	transition: 0.3s;
+}
+
+#edit_area{
+    right: 0rem;
 }
 
 .show{
