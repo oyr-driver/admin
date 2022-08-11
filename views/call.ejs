@@ -563,7 +563,7 @@
                                             </thead>
                                             <tbody>
                                                 <% call.forEach(function(value){ %>
-                                            <tr onclick="getEdit()">
+                                            <tr onclick="location.href='/call/<%= value.callID %>'; getEdit();">
                                                 <th scope="row"></th>
                                                 <td><%= value.callID %></td>
                                                 <td><%= value.userID %></td>
@@ -658,6 +658,7 @@
                                 </div>
                             </div>
                         </div> 
+                        <% if (locals.status === "by") {%>
                         <div class="create_area" id="edit_area"> 
                             <div class="tab-pane tabs-animation " id="tab-content-1" role="tabpanel">
                                 <div class="main-card mb-3 card">
@@ -678,31 +679,31 @@
                                             </div>
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>userID</label>
-                                                <input name="email" id="exampleEmail11"  type="email" class="form-control">
+                                                <input name="email" id="exampleEmail11"  type="email" class="form-control" value="<%= call_data[0].userID %>">
                                             </div>
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>cPhone</label>
-                                                <input name="email" id="exampleEmail11"  type="email" class="form-control">
+                                                <input name="email" id="exampleEmail11"  type="email" class="form-control" value="<%= call_data[0].cPhone %>">
                                             </div>
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class="">S Lat</label>
-                                                <input name="email" id="exampleEmail11"  type="email" class="form-control">
+                                                <input name="email" id="exampleEmail11"  type="email" class="form-control" value="<%= call_data[0].sLat %>">
                                             </div>
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class="">S Long</label>
-                                                <input name="email" id="exampleEmail11"  type="email" class="form-control">
+                                                <input name="email" id="exampleEmail11"  type="email" class="form-control" value="<%= call_data[0].sLong %>">
                                             </div>
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class="">S Addr</label>
-                                                <input name="email" id="exampleEmail11"  type="email" class="form-control">
+                                                <input name="email" id="exampleEmail11"  type="email" class="form-control" value="<%= call_data[0].sAddr %>">
                                             </div>
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>E Addr</label>
-                                                <input name="email" id="exampleEmail11"  type="email" class="form-control">
+                                                <input name="email" id="exampleEmail11"  type="email" class="form-control" value="<%= call_data[0].eAddr %>">
                                             </div>
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>Status</label>
-                                                <select name="select" id="exampleSelect" class="form-control">
+                                                <select name="select" id="exampleSelect" class="form-control" value="<%= call_data[0].status%>">
                                                     <option value="">1</option>
                                                     <option value="">2</option>
                                                     <option value="">3</option>
@@ -710,15 +711,15 @@
                                             </div>
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class="">conID(상담원)</label>
-                                                <input name="email" id="exampleEmail11"  type="email" class="form-control">
+                                                <input name="email" id="exampleEmail11"  type="email" class="form-control" value="<%= call_data[0].conID %>">
                                             </div>
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class="">cpID(회사)</label>
-                                                <input name="email" id="exampleEmail11"  type="email" class="form-control">
+                                                <input name="email" id="exampleEmail11"  type="email" class="form-control" value="<%= call_data[0].cpID %>">
                                             </div>
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class="">addDate</label>
-                                                <input name="email" id="exampleEmail11"  type="email" class="form-control">
+                                                <input name="email" id="exampleEmail11"  type="email" class="form-control" value="<%= call_data[0].addDate %>">
                                             </div>
                                             <div class="position-relative row form-check">
                                                 <div class="col-sm-10 offset-sm-2">
@@ -735,6 +736,7 @@
                                 </div>
                             </div>
                         </div>
+                        <% } %>
                     </div>
 
                     <!-- <div class="app-wrapper-footer">

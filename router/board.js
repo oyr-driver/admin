@@ -59,10 +59,28 @@ router.get('/call', (req, res) => {
             user.NAME = result[0].cpNM;
             // console.log(user)
         })
-        res.render('call',{ accessor : user, call:result});        
+        a =result;
+        res.render('call',{ 
+            accessor : user, 
+            call:result,
+            status: "hi",
+        });             
     });
 });
 
+router.get('/call/:id',(req,res)=>{
+    const sql = "SELECT* FROM g_call WHERE callID = ?";
+    connection.query(sql, [req.params.id], function(err,result,fields){
+        if(err) throw err;
+        console.log(req.params.id);
+        res.render('call',{
+            call:a,
+            accessor : user,
+            call_data: result,
+            status:"by"
+        });
+    });
+});
 router.get('/auth', (req, res) => {
     const sql = "SELECT * FROM g_auth";
     connection.query(sql,(err, result,field)=>{
@@ -117,17 +135,54 @@ router.get('/company/user', (req, res) => {
     connection.query(sql,(err, result,field)=>{
         if(err) throw err;
         // console.log(result);
-        res.render('user',{accessor : user, user:result});        
+        a =result;
+        res.render('user',{
+            accessor : user, 
+            user:result,
+            status: "hi",
+        });            
     });
 })
+
+router.get('/company/user/:id',(req,res)=>{
+    const sql = "SELECT* FROM g_user WHERE userID = ?";
+    connection.query(sql, [req.params.id], function(err,result,fields){
+        if(err) throw err;
+        console.log(req.params.id);
+        res.render('user',{
+            user:a,
+            accessor : user,
+            user_data: result,
+            status:"by"
+        });
+    });
+});
 
 router.get('/company/cons', (req, res) => {
     const sql = "SELECT * FROM g_consultant";
     connection.query(sql,(err, result,field)=>{
         if(err) throw err;
         // console.log(result);
-        res.render('consultant',{accessor : user, consultant:result});        
+        a =result;
+        res.render('consultant',{
+            accessor : user, 
+            consultant:result,
+            status: "hi",
+        });       
     });
 })
 
+router.get('/company/cons/:id',(req,res)=>{
+    const sql = "SELECT* FROM g_consultant WHERE conID = ?";
+    connection.query(sql, [req.params.id], function(err,result,fields){
+        if(err) throw err;
+        console.log(req.params.id);
+        res.render('consultant',{
+            consultant:a,
+            accessor : user,
+            cons_data: result,
+            status:"by"
+        });
+    });
+});
 module.exports = router;
