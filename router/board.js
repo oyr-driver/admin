@@ -115,6 +115,7 @@ router.post('/company/com',(req,res)=>{
     })
 })
 
+//edit파일로 이동
 router.get('/company/com/:id',(req,res)=>{
     const sql = "SELECT* FROM g_company WHERE cpID = ?";
     connection.query(sql, [req.params.id], function(err,result,fields){
@@ -129,6 +130,23 @@ router.get('/company/com/:id',(req,res)=>{
     });
 });
 
+//company 수정
+router.post('/company/com/update/:id',(req,res)=>{
+    const sql = "UPDATE g_company SET ? WHERE cpID = ?";
+    connection.query(sql,[req.body, req.params.id],(err,result,fields)=>{
+        if(err) throw err;
+        res.redirect('/company/com');
+    })
+})
+
+//company 삭제
+router.get('/company/com/delete/:id',(req,res)=>{
+    const sql = "DELETE FROM g_company WHERE cpID = ?";
+    connection.query(sql,[req.params.id],(err,result,fields)=>{
+        if(err) throw err;
+        res.redirect('/company/com');
+    })
+})
 
 router.get('/company/user', (req, res) => {
     const sql = "SELECT * FROM g_user";

@@ -560,46 +560,6 @@
                                                 <td><%= value.cpNM %></td>
                                                 <td><%= value.cpPhone %></td>
                                             </tr>
-                                            <!-- <div class="create_area" id="edit_area"> 
-                                                <div class="tab-pane tabs-animation " id="tab-content-1" role="tabpanel">
-                                                    <div class="main-card mb-3 card">
-                                                        <div class="card-body">
-                                                            <div style="display:flex;">
-                                                                <button type="button" value="" onclick="getSave()" style="border: none; background:none; ">
-                                                                    <span>
-                                                                        <i class="pe-7s-angle-right-circle" style="font-size:2rem;"></i>
-                                                                    </span>
-                                                                </button>
-                                                                <h5 class="card-title" style="font-size: 1.5rem; margin-top: 5px;">Edit</h5>
-                                                            </div>
-                                                            <form class="" action="/company/com" method="post" >
-                                                                <div class="position-relative form-group">
-                                                                    <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>cpID</label>
-                                                                    <input name="email" id="exampleEmail11"  type="text" class="form-control" value="<%= value.cpID %>">
-                                                                </div>
-                                                                <div class="position-relative form-group">
-                                                                    <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>cpNM</label>
-                                                                    <input name="email" id="exampleEmail11"  type="text" class="form-control" value="<%= value.cpNM %>">
-                                                                </div>
-                                                                <div class="position-relative form-group">
-                                                                    <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>cpPhone</label>
-                                                                    <input name="email" id="exampleEmail11"  type="text" class="form-control" value="<%= value.cpPhone %>">
-                                                                </div>
-                                                                <div class="position-relative row form-check">
-                                                                    <div class="col-sm-10 offset-sm-2">
-                                                                        <button class="btn btn-secondary" style="width:440px; float:right;" onclick="getSave()">Submit</button>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="position-relative row form-check">
-                                                                    <div class="col-sm-10 offset-sm-2">
-                                                                        <button class="btn btn-danger" style="width:440px; float:right;">Delete</button>
-                                                                    </div>
-                                                                </div>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div> -->
                                                 <% }); %>
                                             </tbody>
                                         </table>
@@ -668,7 +628,7 @@
                                             </button>
                                             <h5 class="card-title" style="font-size: 1.5rem; margin-top: 5px;">Edit</h5>
                                         </div>
-                                        <form class="" action="/company/com" method="post" >
+                                        <form class="" action="/company/com/update/<%= com_data[0].cpID %>" method="post" >
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>cpID</label>
                                                 <input name="cpID" id="exampleEmail11"  type="text" class="form-control" value="<%= com_data[0].cpID %>">
@@ -679,19 +639,30 @@
                                             </div>
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>cpPhone</label>
-                                                <input name="cpPhone" id="exampleEmail11"  type="text" class="form-control"  value="<%= com_data[0].cpPhone %>">
+                                                <input name="cpPhone" id="exampleEmail11"  type="text" class="form-control"  value="<%= com_data[0].cpPhone %>" >
                                             </div>
                                             <div class="position-relative row form-check">
                                                 <div class="col-sm-10 offset-sm-2">
-                                                    <button class="btn btn-secondary" style="width:440px; float:right;" onclick="getSave()">Submit</button>
+                                                    <button class="btn btn-secondary" style="width:440px; float:right;" >Submit</button>
                                                 </div>
                                             </div>
-                                            <div class="position-relative row form-check">
+                                            <!-- <div class="position-relative row form-check">
                                                 <div class="col-sm-10 offset-sm-2">
-                                                    <button class="btn btn-danger" style="width:440px; float:right;">Delete</button>
+                                                    <a href="/company/com/<%= com_data[0].cpID %>">
+                                                        <button class="btn btn-danger" style="width:440px; float:right;">
+                                                            Delete
+                                                        </button>
+                                                    </a>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         </form>
+                                        <div class="position-relative row form-check">
+                                            <div class="col-sm-10 offset-sm-2">
+                                                    <button class="btn btn-danger" style="width:440px; float:right;" onclick="location.href='/company/com/delete/<%= com_data[0].cpID %>'">
+                                                        Delete
+                                                    </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
