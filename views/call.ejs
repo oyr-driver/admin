@@ -607,47 +607,48 @@
                                             </button>
                                             <h5 class="card-title" style="font-size: 1.5rem; margin-top: 5px;">Create new</h5>
                                         </div>
-                                        <form class="" action="/call" method="post" >
+                                        <form class="" action="/call/create" method="post" >
+                                            <!-- <div class="position-relative form-group">
+                                                <label for="exampleEmail11" class="">UserID(고객ID)</label>
+                                                <input name="userID" id="exampleEmail11"  type="text" class="form-control">
+                                            </div>  -->
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>Phone</label>
-                                                <input name="email" id="exampleEmail11"  type="email" class="form-control">
+                                                <input name="cPhone" id="exampleEmail11"  type="text" class="form-control">
                                             </div>
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class="">S Lat</label>
-                                                <input name="email" id="exampleEmail11"  type="email" class="form-control">
+                                                <input name="sLat" id="exampleEmail11"  type="text" class="form-control">
                                             </div>
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class="">S Long</label>
-                                                <input name="email" id="exampleEmail11"  type="email" class="form-control">
+                                                <input name="sLong" id="exampleEmail11"  type="text" class="form-control">
                                             </div>
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class="">S Addr</label>
-                                                <input name="email" id="exampleEmail11"  type="email" class="form-control">
+                                                <input name="sAddr" id="exampleEmail11"  type="text" class="form-control">
                                             </div>
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>E Addr</label>
-                                                <input name="email" id="exampleEmail11"  type="email" class="form-control">
+                                                <input name="eAddr" id="exampleEmail11"  type="text" class="form-control">
                                             </div>
-                                            <div class="position-relative form-group">
+                                            <!-- <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>Status</label>
-                                                <select name="select" id="exampleSelect" class="form-control">
+                                                <select name="status" value = '1' id="exampleSelect" class="form-control">
                                                     <option value="">1</option>
                                                     <option value="">2</option>
                                                     <option value="">3</option>
                                                 </select>
-                                            </div>
-                                            <div class="position-relative form-group">
-                                                <label for="exampleEmail11" class="">Addr Chk</label>
-                                                <input name="email" id="exampleEmail11"  type="email" class="form-control">
-                                            </div>
-                                            <div class="position-relative form-group">
+                                            </div> -->
+                                            <!-- <div class="position-relative form-group">
+                                                <label for="exampleEmail11" class="">conID</label>
+                                                <input name="conID" id="exampleEmail11"  type="text" class="form-control">
+                                            </div> -->
+                                            <!-- <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class="">Add Date</label>
-                                                <input name="email" id="exampleEmail11"  type="datetime-local" class="form-control">
-                                            </div>
-                                            <div class="position-relative form-group">
-                                                <label for="exampleEmail11" class="">User</label>
-                                                <input name="email" id="exampleEmail11"  type="email" class="form-control">
-                                            </div>
+                                                <input name="addDate" id="exampleEmail11"  type="datetime-local" class="form-control">
+                                            </div> -->
+                                            
                                             <div class="position-relative row form-check">
                                                 <div class="col-sm-10 offset-sm-2">
                                                     <button class="btn btn-secondary" style="width:440px; float:right;" onclick="getHide()">Submit</button>
@@ -671,7 +672,7 @@
                                             </button>
                                             <h5 class="card-title" style="font-size: 1.5rem; margin-top: 5px;">Edit</h5>
                                         </div>
-                                        <form class="" action="/call" method="post" >
+                                        <form class="" action="/call/update/<%= call_data[0].callID %>" method="post" >
                                             <div class="position-relative row form-check">
                                                 <div class="col-sm-10 offset-sm-2">
                                                     <button class="btn btn-success" style="width:440px; float:right;">Send Message</button>
@@ -679,31 +680,31 @@
                                             </div>
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>userID</label>
-                                                <input name="email" id="exampleEmail11"  type="email" class="form-control" value="<%= call_data[0].userID %>">
+                                                <input name="userID" id="exampleEmail11"  type="text" class="form-control" value="<%= call_data[0].userID %>">
                                             </div>
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>cPhone</label>
-                                                <input name="email" id="exampleEmail11"  type="email" class="form-control" value="<%= call_data[0].cPhone %>">
+                                                <input name="cPhone" id="exampleEmail11"  type="text" class="form-control" value="<%= call_data[0].cPhone %>">
                                             </div>
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class="">S Lat</label>
-                                                <input name="email" id="exampleEmail11"  type="email" class="form-control" value="<%= call_data[0].sLat %>">
+                                                <input name="sLat" id="exampleEmail11"  type="text" class="form-control" value="<%= call_data[0].sLat %>">
                                             </div>
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class="">S Long</label>
-                                                <input name="email" id="exampleEmail11"  type="email" class="form-control" value="<%= call_data[0].sLong %>">
+                                                <input name="sLong" id="exampleEmail11"  type="text" class="form-control" value="<%= call_data[0].sLong %>">
                                             </div>
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class="">S Addr</label>
-                                                <input name="email" id="exampleEmail11"  type="email" class="form-control" value="<%= call_data[0].sAddr %>">
+                                                <input name="sAddr" id="exampleEmail11"  type="text" class="form-control" value="<%= call_data[0].sAddr %>">
                                             </div>
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>E Addr</label>
-                                                <input name="email" id="exampleEmail11"  type="email" class="form-control" value="<%= call_data[0].eAddr %>">
+                                                <input name="eAddr" id="exampleEmail11"  type="text" class="form-control" value="<%= call_data[0].eAddr %>">
                                             </div>
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>Status</label>
-                                                <select name="select" id="exampleSelect" class="form-control" value="<%= call_data[0].status%>">
+                                                <select name="status" id="exampleSelect" class="form-control" value="<%= call_data[0].status%>">
                                                     <option value="">1</option>
                                                     <option value="">2</option>
                                                     <option value="">3</option>
@@ -711,15 +712,15 @@
                                             </div>
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class="">conID(상담원)</label>
-                                                <input name="email" id="exampleEmail11"  type="email" class="form-control" value="<%= call_data[0].conID %>">
+                                                <input name="conID" id="exampleEmail11"  type="text" class="form-control" value="<%= call_data[0].conID %>">
                                             </div>
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class="">cpID(회사)</label>
-                                                <input name="email" id="exampleEmail11"  type="email" class="form-control" value="<%= call_data[0].cpID %>">
+                                                <input name="cpID" id="exampleEmail11"  type="text" class="form-control" value="<%= call_data[0].cpID %>">
                                             </div>
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class="">addDate</label>
-                                                <input name="email" id="exampleEmail11"  type="email" class="form-control" value="<%= call_data[0].addDate %>">
+                                                <input name="addDate" id="exampleEmail11"  type="datetime" class="form-control" value="<%= call_data[0].addDate %>">
                                             </div>
                                             <div class="position-relative row form-check">
                                                 <div class="col-sm-10 offset-sm-2">
@@ -728,7 +729,7 @@
                                             </div>
                                             <div class="position-relative row form-check">
                                                 <div class="col-sm-10 offset-sm-2">
-                                                    <button class="btn btn-danger" style="width:440px; float:right;">Delete</button>
+                                                    <button class="btn btn-danger" style="width:440px; float:right;" onclick="location.href='/call/delete/<%= call_data[0].callID %>'">Delete</button>
                                                 </div>
                                             </div>
                                         </form>
