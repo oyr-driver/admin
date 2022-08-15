@@ -9,7 +9,6 @@ const connection = mysql.createConnection(dbconfig);
 
 //고객 정보
 var user={};
-
 let call_d;
 
 //로그인
@@ -32,7 +31,7 @@ router.get('/call', (req, res) => {
         res.render('call',{ 
             accessor : user, 
             call:result,
-            status: "hi",
+            status: "hide",
         });             
     });
 });
@@ -58,7 +57,7 @@ router.get('/call/:id',(req,res)=>{
             call:call_d,
             accessor : user,
             call_data: result,
-            status:"by"
+            status:"show"
         });
     });
 });

@@ -10,31 +10,6 @@ const connection = mysql.createConnection(dbconfig);
 //고객 정보
 var user={};
 
-// //로그인
-// router.get('/call', (req, res) => {
-//     const sql = "SELECT * FROM g_call";
-//     connection.query(sql,(err, result,field)=>{
-//         if(err) throw err;
-//         //console.log(req.session.users);
-//         //고객정보 session으로 받아오기
-//         user.ID = req.session.users.user_ID;
-//         user.PW = req.session.users.user_PW;
-//         user.CP = req.session.users.user_CP;
-//         connection.query('SELECT * FROM g_consultant WHERE conID = ?',[user.ID], function(error, result){
-//             if(error) throw error;
-//             user.AUTH = result[0].authCD;
-//             user.NAME = result[0].cpNM;
-//             // console.log(user)
-//         })
-//         a =result;
-//         res.render('call',{ 
-//             accessor : user, 
-//             call:result,
-//             status: "hi",
-//         });             
-//     });
-// });
-
 //company
 let com_d; //accerssor
 router.get('/company/com', (req, res) => {
@@ -59,7 +34,7 @@ router.get('/company/com', (req, res) => {
         res.render('company',{
             accessor : user, 
             company:result,
-            status: "hi",
+            status: "hide",
         });        
     });
 })
@@ -84,7 +59,7 @@ router.get('/company/com/:id',(req,res)=>{
             company:com_d,
             accessor : user,
             com_data: result,
-            status:"by"
+            status:"show"
         });
     });
 });

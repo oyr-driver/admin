@@ -1,7 +1,7 @@
 const http = require('http');
 const express = require('express');
 const ejs = require('ejs');
-const boardRouter = require('./router/board.js');//require이용하여 모듈을 가지고 옴, 페이지 라우터
+// const boardRouter = require('./router/board.js');//require이용하여 모듈을 가지고 옴, 페이지 라우터
 const board_call_Router = require('./router/board_call.js');//require이용하여 모듈을 가지고 옴, call라우터
 const board_com_Router = require('./router/board_com.js');//require이용하여 모듈을 가지고 옴, call라우터
 const board_cons_Router = require('./router/board_cons.js');//require이용하여 모듈을 가지고 옴, call라우터

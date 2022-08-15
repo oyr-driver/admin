@@ -34,7 +34,7 @@ router.get('/company/cons', (req, res) => {
         res.render('consultant',{
             accessor : user, 
             consultant:result,
-            status: "hi",
+            status: "hide",
         });       
     });
 })
@@ -59,7 +59,7 @@ router.get('/company/cons/:id',(req,res)=>{
             consultant:cons_d,
             accessor : user,
             cons_data: result,
-            status:"by"
+            status:"show"
         });
     });
 });
