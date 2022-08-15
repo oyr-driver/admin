@@ -10,7 +10,7 @@ const connection = mysql.createConnection(dbconfig);
 //고객 정보
 var user={};
 
-//get
+//로그인
 router.get('/call', (req, res) => {
     const sql = "SELECT * FROM g_call";
     connection.query(sql,(err, result,field)=>{
@@ -35,6 +35,18 @@ router.get('/call', (req, res) => {
     });
 });
 
+//call
+//-call 추가
+router.post('/call/create',(req,res)=>{
+    const sql = "INSERT INTO g_call(cPhone,eAddr,status,conID,cpID) values (?) "
+    connection.query(sql,req.body, (err,result,fields)=>{
+        if(err) throw err;
+        console.log(result);
+        res.redirect('/call');
+    })
+})
+
+//-edit파일로 이동
 router.get('/call/:id',(req,res)=>{
     const sql = "SELECT* FROM g_call WHERE callID = ?";
     connection.query(sql, [req.params.id], function(err,result,fields){
@@ -48,6 +60,25 @@ router.get('/call/:id',(req,res)=>{
         });
     });
 });
+
+//-call 수정
+router.post('/call/update/:id',(req,res)=>{
+    const sql = "UPDATE g_call SET ? WHERE callID = ?";
+    connection.query(sql,[req.body, req.params.id],(err,result,fields)=>{
+        if(err) throw err;
+        res.redirect('/call');
+    })
+})
+
+//-call 삭제
+router.get('/call/delete/:id',(req,res)=>{
+    const sql = "DELETE FROM g_call WHERE callID = ?";
+    connection.query(sql,[req.params.id],(err,result,fields)=>{
+        if(err) throw err;
+        res.redirect('/call');
+    })
+})
+
 
 //auth 데이터 불러오기
 router.get('/auth', (req, res) => {
@@ -134,6 +165,7 @@ router.get('/company/user', (req, res) => {
     });
 })
 
+/* user table 삭제 결정_2022.08.15
 //-user 추가
 router.post('/company/user',(req,res)=>{
     const sql = "INSERT INTO g_user SET ?"
@@ -176,6 +208,7 @@ router.get('/company/user/delete/:id',(req,res)=>{
         res.redirect('/company/user');
     })
 })
+*/
 
 //consultant
 let cons_d;//accessor
