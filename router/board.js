@@ -30,7 +30,7 @@ router.get('/call', (req, res) => {
         res.render('call',{ 
             accessor : user, 
             call:result,
-            status: "hi",
+            status: "hide",
         });             
     });
 });
@@ -56,7 +56,7 @@ router.get('/call/:id',(req,res)=>{
             call:a,
             accessor : user,
             call_data: result,
-            status:"by"
+            status:"show"
         });
     });
 });
@@ -101,7 +101,7 @@ router.get('/company/com', (req, res) => {
         res.render('company',{
             accessor : user, 
             company:result,
-            status: "hi",
+            status: "hide",
         });        
     });
 })
@@ -126,7 +126,7 @@ router.get('/company/com/:id',(req,res)=>{
             company:com_d,
             accessor : user,
             com_data: result,
-            status:"by"
+            status:"show"
         });
     });
 });
@@ -160,7 +160,7 @@ router.get('/company/user', (req, res) => {
         res.render('user',{
             accessor : user, 
             user:result,
-            status: "hi",
+            status: "hide",
         });            
     });
 })
@@ -186,7 +186,7 @@ router.get('/company/user/:id',(req,res)=>{
             user:user_d,
             accessor : user,
             user_data: result,
-            status:"by"
+            status:"show"
         });
     });
 });
@@ -221,7 +221,7 @@ router.get('/company/cons', (req, res) => {
         res.render('consultant',{
             accessor : user, 
             consultant:result,
-            status: "hi",
+            status: "hide",
         });       
     });
 })
@@ -246,7 +246,7 @@ router.get('/company/cons/:id',(req,res)=>{
             consultant:cons_d,
             accessor : user,
             cons_data: result,
-            status:"by"
+            status:"show"
         });
     });
 });

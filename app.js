@@ -1,7 +1,10 @@
 const http = require('http');
 const express = require('express');
 const ejs = require('ejs');
-const boardRouter = require('./router/board.js');//require이용하여 모듈을 가지고 옴, 페이지 라우터
+// const boardRouter = require('./router/board.js');//require이용하여 모듈을 가지고 옴, 페이지 라우터
+const board_call_Router = require('./router/board_call.js');//require이용하여 모듈을 가지고 옴, call라우터
+const board_com_Router = require('./router/board_com.js');//require이용하여 모듈을 가지고 옴, call라우터
+const board_cons_Router = require('./router/board_cons.js');//require이용하여 모듈을 가지고 옴, call라우터
 const board_log_Router = require('./router/login_out.js');//로그인 라우터
 const bodyParser = require('body-parser');//body를 parsing해주는 미들웨어
 const expressSession=require('express-session');//session 사용할때 필요
@@ -34,7 +37,10 @@ app.use(expressSession({
 }));
 
 //라우터 연결
-app.use(boardRouter);
+// app.use(boardRouter);
+app.use(board_call_Router);
+app.use(board_com_Router);
+app.use(board_cons_Router);
 app.use(board_log_Router);
 
 connection.connect();
