@@ -49,13 +49,12 @@ router.get('/company/com', (req, res) => {
         user.ID = req.session.users.user_ID;
         user.PW = req.session.users.user_PW;
         user.CP = req.session.users.user_CP;
+
         connection.query('SELECT * FROM g_consultant WHERE conID = ?',[user.ID], function(error, result_user){
             if(error) throw error;
             user.AUTH = result_user[0].authCD;
             user.NAME = result_user[0].cpNM;
-            console.log(user);
         })
-        user =result_user;
 
         res.render('company',{
             accessor : user, 

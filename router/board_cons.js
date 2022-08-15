@@ -10,31 +10,6 @@ const connection = mysql.createConnection(dbconfig);
 //고객 정보
 var user={};
 
-//로그인
-router.get('/call', (req, res) => {
-    const sql = "SELECT * FROM g_call";
-    connection.query(sql,(err, result,field)=>{
-        if(err) throw err;
-        //console.log(req.session.users);
-        //고객정보 session으로 받아오기
-        user.ID = req.session.users.user_ID;
-        user.PW = req.session.users.user_PW;
-        user.CP = req.session.users.user_CP;
-        connection.query('SELECT * FROM g_consultant WHERE conID = ?',[user.ID], function(error, result){
-            if(error) throw error;
-            user.AUTH = result[0].authCD;
-            user.NAME = result[0].cpNM;
-            // console.log(user)
-        })
-        a =result;
-        res.render('call',{ 
-            accessor : user, 
-            call:result,
-            status: "hi",
-        });             
-    });
-});
-
 //consultant
 let cons_d;//accessor
 router.get('/company/cons', (req, res) => {
@@ -43,6 +18,19 @@ router.get('/company/cons', (req, res) => {
         if(err) throw err;
         // console.log(result);
         cons_d =result;
+        
+            //console.log(req.session.users);
+        //고객정보 session으로 받아오기
+        user.ID = req.session.users.user_ID;
+        user.PW = req.session.users.user_PW;
+        user.CP = req.session.users.user_CP;
+
+        connection.query('SELECT * FROM g_consultant WHERE conID = ?',[user.ID], function(error, result_user){
+            if(error) throw error;
+            user.AUTH = result_user[0].authCD;
+            user.NAME = result_user[0].cpNM;
+        })
+
         res.render('consultant',{
             accessor : user, 
             consultant:result,
