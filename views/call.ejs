@@ -388,7 +388,9 @@
                             </div>
                         </div> 
                         <!-- edit  -->
+
                         <% if (locals.status === "show") {%>
+
                         <div class="create_area" id="edit_area"> 
                             <div class="tab-pane tabs-animation " id="tab-content-1" role="tabpanel">
                                 <div class="main-card mb-3 card">
@@ -522,18 +524,15 @@
         document.getElementById("create_area").style.right = "0px";
         
     }
-
     function getHide(){
         document.getElementById("create_area").style.right = "-30rem";
         // document.getElementById("create_area").className = "show";
     }
-
     //옵션 수정 화면
     function getEdit(){
         document.getElementById("edit_area").style.display = "block";
         document.getElementById("edit_area").style.right = "0px";
     }
-
     function getSave(){
         document.getElementById("edit_area").style.right = "-30rem";
     }
