@@ -209,10 +209,12 @@
                                     </div>
                                 </div>
                                 <div class="page-title-actions">
+                                    <% if (locals.create_btn === "show") {%>
                                     <button type="button" data-toggle="tooltip" title="Example Tooltip" data-placement="bottom" class="mb-2 mr-2 btn btn-primary" onclick="getShow()">
                                         <!-- <i class="fa fa-star"></i> -->
                                         + Create new
                                     </button>
+                                    <% } %>
                                     <div class="d-inline-block dropdown">
                                         <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="mb-2 mr-2 btn-transition btn btn-outline-info">
                                             <span class="btn-icon-wrapper pr-2 opacity-7">
@@ -275,9 +277,10 @@
                                             </tr>
                                             </thead>
                                             <tbody>
+                                                <% let i =0; %>
                                                 <% company.forEach(function (value){ %>
                                             <tr onclick="location.href='/company/com/<%= value.cpID %>'; getEdit();">
-                                                <th scope="row"></th>
+                                                <th scope="row"><%= ++i %></th>
                                                 <td><%= value.cpID %></td>
                                                 <td><%= value.cpNM %></td>
                                                 <td><%= value.cpPhone %></td>
@@ -337,7 +340,7 @@
                                 </div>
                             </div>
                         </div> 
-                        <% if (locals.status === "show") {%>
+                        <% if (locals.status === "show_auth_one") {%>
                         <div class="create_area" id="edit_area"> 
                             <div class="tab-pane tabs-animation " id="tab-content-1" role="tabpanel">
                                 <div class="main-card mb-3 card">
@@ -368,15 +371,6 @@
                                                     <button class="btn btn-secondary" style="width:440px; float:right;" >Submit</button>
                                                 </div>
                                             </div>
-                                            <!-- <div class="position-relative row form-check">
-                                                <div class="col-sm-10 offset-sm-2">
-                                                    <a href="/company/com/<%= com_data[0].cpID %>">
-                                                        <button class="btn btn-danger" style="width:440px; float:right;">
-                                                            Delete
-                                                        </button>
-                                                    </a>
-                                                </div>
-                                            </div> -->
                                         </form>
                                         <div class="position-relative row form-check">
                                             <div class="col-sm-10 offset-sm-2">
@@ -390,6 +384,43 @@
                             </div>
                         </div>
                         <% } %>
+                        <% if (locals.status === "show_auth_two") {%>
+                            <div class="create_area" id="edit_area"> 
+                                <div class="tab-pane tabs-animation " id="tab-content-1" role="tabpanel">
+                                    <div class="main-card mb-3 card">
+                                        <div class="card-body">
+                                            <div style="display:flex;">
+                                                <button type="button" value="" onclick="getSave()" style="border: none; background:none; ">
+                                                    <span>
+                                                        <i class="pe-7s-angle-right-circle" style="font-size:2rem;"></i>
+                                                    </span>
+                                                </button>
+                                                <h5 class="card-title" style="font-size: 1.5rem; margin-top: 5px;">Edit</h5>
+                                            </div>
+                                            <form class="" action="/company/com/update/<%= com_data[0].cpID %>" method="post" >
+                                                <div class="position-relative form-group">
+                                                    <label for="exampleEmail11" class=""><span style="color: #4268F6;" >*</span>cpID</label>
+                                                    <input name="cpID" id="exampleEmail11"  type="text" class="form-control" value="<%= com_data[0].cpID %>" readonly>
+                                                </div>
+                                                <div class="position-relative form-group">
+                                                    <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>cpNM</label>
+                                                    <input name="cpNM" id="exampleEmail11"  type="text" class="form-control" value="<%= com_data[0].cpNM %>">
+                                                </div>
+                                                <div class="position-relative form-group">
+                                                    <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>cpPhone</label>
+                                                    <input name="cpPhone" id="exampleEmail11"  type="text" class="form-control"  value="<%= com_data[0].cpPhone %>" >
+                                                </div>
+                                                <div class="position-relative row form-check">
+                                                    <div class="col-sm-10 offset-sm-2">
+                                                        <button class="btn btn-secondary" style="width:440px; float:right;" >Submit</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <% } %>
                     </div>
 
                     <div class="app-wrapper-footer">
