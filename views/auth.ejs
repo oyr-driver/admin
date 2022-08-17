@@ -407,9 +407,10 @@
                                             </tr>
                                             </thead>
                                             <tbody>
+                                                <% let i =0; %>
                                                 <% auth.forEach(function(value){ %>
                                             <tr onclick="getEdit()">
-                                                <th scope="row"></th>
+                                                <th scope="row"><%= ++i %></th>
                                                 <td><%= value.code %></td>
                                                 <td><%= value.cdNM %></td>
                                             </tr>

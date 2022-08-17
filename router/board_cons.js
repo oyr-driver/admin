@@ -9,9 +9,9 @@ const connection = mysql.createConnection(dbconfig);
 
 //고객 정보
 var user={};
+let cons_d;//accessor
 
 //consultant
-let cons_d;//accessor
 router.get('/company/cons', (req, res) => {
     user.ID = req.session.users.user_ID;
     user.PW = req.session.users.user_PW;
@@ -60,12 +60,12 @@ router.get('/company/cons', (req, res) => {
     }
 });
 
-//-company 추가
+//-consultant 추가
 router.post('/company/cons',(req,res)=>{
     const sql = "INSERT INTO g_consultant SET ?"
     connection.query(sql,req.body, (err,result,fields)=>{
         if(err) throw err;
-        console.log(result);
+        console.log("consultant 추가: "+result);
         res.redirect('/company/cons');
     })
 })
@@ -75,7 +75,7 @@ router.get('/company/cons/:id',(req,res)=>{
     const sql = "SELECT* FROM g_consultant WHERE conID = ?";
     connection.query(sql, [req.params.id], function(err,result,fields){
         if(err) throw err;
-        console.log(req.params.id);
+        console.log("상담원 id 접속 : "+req.params.id);
         res.render('consultant',{
             consultant:cons_d,
             accessor : user,
@@ -99,6 +99,7 @@ router.get('/company/cons/delete/:id',(req,res)=>{
     const sql = "DELETE FROM g_consultant WHERE conID = ?";
     connection.query(sql,[req.params.id],(err,result,fields)=>{
         if(err) throw err;
+        console.log("상담원 삭제 : "+req.params.id);
         res.redirect('/company/cons');
     })
 })

@@ -60,35 +60,17 @@
                         </span>
                     </button>
                 </span>
-            </div>    <div class="app-header__content">
+            </div>    
+            <div class="app-header__content">
                 <div class="app-header-left">
                     <div class="search-wrapper">
                         <div class="input-holder">
-                            <input type="text" class="search-input" placeholder="Type to search">
+                            <!-- 검색 기능 구현 -->
+                            <input type="text" class="search-input" placeholder="Type to search number" id="value_num" onkeyup="filter_number()">
                             <button class="search-icon"><span></span></button>
                         </div>
                         <button class="close"></button>
                     </div>
-                    <!-- <ul class="header-menu nav">
-                        <li class="nav-item">
-                            <a href="javascript:void(0);" class="nav-link">
-                                <i class="nav-link-icon fa fa-database"> </i>
-                                Statistics
-                            </a>
-                        </li>
-                        <li class="btn-group nav-item">
-                            <a href="javascript:void(0);" class="nav-link">
-                                <i class="nav-link-icon fa fa-edit"></i>
-                                Projects
-                            </a>
-                        </li>
-                        <li class="dropdown nav-item">
-                            <a href="javascript:void(0);" class="nav-link">
-                                <i class="nav-link-icon fa fa-cog"></i>
-                                Settings
-                            </a>
-                        </li>
-                    </ul>         -->
                 </div>
                 <div class="app-header-right">
                     <div class="header-btn-lg pr-0">
@@ -215,12 +197,31 @@
                                         + Create new
                                     </button>
                                     <div class="d-inline-block dropdown">
-                                        <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="mb-2 mr-2 btn-transition btn btn-outline-info">
+                                        <!-- <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="mb-2 mr-2 btn-transition btn btn-outline-info">
                                             <span class="btn-icon-wrapper pr-2 opacity-7">
                                                 <i class="fa pe-7s-edit fa-w-20"></i>
                                             </span>
                                             Filter
-                                        </button>
+                                        </button> -->
+                                        <% if (locals.filter_status === "show") {%>
+                                            <form class="" action="/call/filter" method="post" style="display: flex;">
+                                                <div class="position-relative row form-check">
+                                                    <select name="conID" id="exampleSelect" class="form-control">
+                                                        <option value="<%= locals.filter_cons_name %>">now: <%= locals.filter_cons_name %></option>
+                                                        <option value="ALL">ALL</option>
+                                                        <% call_cons_d.forEach(function(value){ %>
+                                                        <option value="<%= value.conID %>"><%= value.conID %></option>
+                                                        <% }); %>
+                                                    </select>
+                                                </div>
+                                                <div class="position-relative row form-check">
+                                                    <div class="col-sm-10 offset-sm-2">
+                                                        <!-- <button class="btn btn-secondary" style="width:440px; float:right;" >Submit</button>-->
+                                                        <button class="mb-2 mr-2 btn-transition btn btn-outline-info" style="font-size: 1rem;">OK</button>
+                                                    </div>
+                                                </div>
+                                            </form> 
+                                        <% } %>
                                         <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
                                             <ul class="nav flex-column">
                                                 <li class="nav-item">
@@ -283,11 +284,12 @@
                                             </tr>
                                             </thead>
                                             <tbody>
+                                                <% let i =0; %>
                                                 <% call.forEach(function(value){ %>
-                                            <tr onclick="location.href='/call/<%= value.callID %>'; getEdit();">
-                                                <th scope="row"></th>
+                                            <tr class="item_num" onclick="location.href='/call/<%= value.callID %>'; getEdit();">
+                                                <th scope="row"><%= ++i %></th>
                                                 <td><%= value.callID %></td>
-                                                <td><%= value.cPhone %></td>
+                                                <td class="name_num"><%= value.cPhone %></td>
                                                 <td><%= value.sAddr %></td>
                                                 <td><%= value.eAddr %></td>
                                                 <td><%= value.status %></td>
@@ -329,30 +331,10 @@
                                         </div>
                                         <!-- new call create -->
                                         <form class="" action="/call/create" method="post" >
-                                            <!-- <div class="position-relative form-group">
-                                                <label for="exampleEmail11" class="">callID</label>
-                                                <input name="callID" id="exampleEmail11"  type="text" class="form-control">
-                                            </div> -->
-                                            <!-- <div class="position-relative form-group">
-                                                <label for="exampleEmail11" class="">userID</label>
-                                                <input name="userID" id="exampleEmail11"  type="text" class="form-control">
-                                            </div> -->
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>cPhone</label>
                                                 <input name="cPhone" id="exampleEmail11"  type="text" class="form-control">
                                             </div>
-                                            <!-- <div class="position-relative form-group">
-                                                <label for="exampleEmail11" class="">S Lat</label>
-                                                <input name="sLat" id="exampleEmail11"  type="text" class="form-control">
-                                            </div>
-                                            <div class="position-relative form-group">
-                                                <label for="exampleEmail11" class="">S Long</label>
-                                                <input name="sLong" id="exampleEmail11"  type="text" class="form-control">
-                                            </div>
-                                            <div class="position-relative form-group">
-                                                <label for="exampleEmail11" class="">S Addr</label>
-                                                <input name="sAddr" id="exampleEmail11"  type="text" class="form-control">
-                                            </div> -->
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>E Addr</label>
                                                 <input name="eAddr" id="exampleEmail11"  type="text" class="form-control">
@@ -373,10 +355,6 @@
                                                 <label for="exampleEmail11" class="">cpID</label>
                                                 <input name="cpID" id="exampleEmail11"  type="text" class="form-control" value="<%= accessor.CP %>" readonly>
                                             </div>
-                                            <!-- <div class="position-relative form-group">
-                                                <label for="exampleEmail11" class="">Add Date</label>
-                                                <input name="addDate" id="exampleEmail11"  type="datetime-local" class="form-control">
-                                            </div> -->
                                             <div class="position-relative row form-check">
                                                 <div class="col-sm-10 offset-sm-2">
                                                     <button class="btn btn-secondary" style="width:440px; float:right;" onclick="getHide()">Submit</button>
@@ -387,10 +365,10 @@
                                 </div>
                             </div>
                         </div> 
+                        
+
                         <!-- edit  -->
-
                         <% if (locals.status === "show") {%>
-
                         <div class="create_area" id="edit_area"> 
                             <div class="tab-pane tabs-animation " id="tab-content-1" role="tabpanel">
                                 <div class="main-card mb-3 card">
@@ -403,12 +381,12 @@
                                             </button>
                                             <h5 class="card-title" style="font-size: 1.5rem; margin-top: 5px;">Edit</h5>
                                         </div>
-                                        <form class="" action="/call/update/<%= call_data[0].callID %>" method="post" >
-                                            <div class="position-relative row form-check">
-                                                <div class="col-sm-10 offset-sm-2">
-                                                    <button class="btn btn-success" style="width:440px; float:right;">Send Message</button>
-                                                </div>
+                                        <div class="position-relative row form-check">
+                                            <div class="col-sm-10 offset-sm-2">
+                                                <button class="btn btn-success" style="width:440px; float:right;" onclick="location.href='/call/send/'">Send Message</button>
                                             </div>
+                                        </div>
+                                        <form class="" action="/call/update/<%= call_data[0].callID %>" method="post" >
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>callID</label>
                                                 <input name="callID" id="exampleEmail11"  type="text" class="form-control" value="<%= call_data[0].callID %>" readonly>
@@ -439,10 +417,11 @@
                                             </div>
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>Status</label>
-                                                <select name="status" id="exampleSelect" class="form-control" value="<%= call_data[0].status%>">
-                                                    <option value="">1</option>
-                                                    <option value="">2</option>
-                                                    <option value="">3</option>
+                                                <select name="status" id="exampleSelect" class="form-control" >
+                                                    <option value="<%= call_data[0].status%>">now: <%= call_data[0].status%></option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
                                                 </select>
                                             </div>
                                             <div class="position-relative form-group">
@@ -466,7 +445,7 @@
                                         <div class="position-relative row form-check">
                                             <div class="col-sm-10 offset-sm-2">
                                                 <button class="btn btn-danger" style="width:440px; float:right;" onclick="location.href='/call/delete/<%= call_data[0].callID %>'" >
-                                                    Delete
+                                                    Delete 
                                                 </button>
                                             </div>
                                         </div>
@@ -477,48 +456,7 @@
                         <% } %>
                     </div>
 
-                    <!-- <div class="app-wrapper-footer">
-                        <div class="app-footer">
-                            <div class="app-footer__inner">
-                                <div class="app-footer-left">
-                                    <ul class="nav">
-                                        <li class="nav-item">
-                                            <a href="javascript:void(0);" class="nav-link">
-                                                Footer Link 1
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="javascript:void(0);" class="nav-link">
-                                                Footer Link 2
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="app-footer-right">
-                                    <ul class="nav">
-                                        <li class="nav-item">
-                                            <a href="javascript:void(0);" class="nav-link">
-                                                Footer Link 3
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="javascript:void(0);" class="nav-link">
-                                                <div class="badge badge-success mr-1 ml-0">
-                                                    <small>NEW</small>
-                                                </div>
-                                                Footer Link 4
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>     -->
-                </div>
-        </div>
-    </div>
-
-    <script>
+    <script type="text/javascript">
     function getShow(){
         document.getElementById("create_area").style.display = "block";
         document.getElementById("create_area").style.right = "0px";
@@ -535,6 +473,27 @@
     }
     function getSave(){
         document.getElementById("edit_area").style.right = "-30rem";
+    }
+
+    //전화번호 검색기능 구현
+    function filter_number(){
+        var value, name, item,i,j;
+        var textList = [];
+        value = document.getElementById("value_num").value.toUpperCase();
+        item = document.getElementsByClassName("item_num");
+
+        for(i=0;i<item.length;i++){
+            name = item[i].getElementsByClassName("name_num");
+            if(name[0].innerHTML.toUpperCase().indexOf(value) > -1){
+                item[i].style.visibility = "visible";
+                for(j=0;j<name.length;j++){
+                    textList.push(name[j].innerText);
+                }
+            }else{
+                item[i].style.visibility = "collapse";
+                console.log("delet : "+ name);
+            }
+        }
     }
     </script>
 
