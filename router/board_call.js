@@ -7,6 +7,10 @@ const mysql = require('mysql');
 const dbconfig = require('../config/database.js');//db router
 const connection = mysql.createConnection(dbconfig);
 
+//메세지 전송 기능 모듈
+const send_message = require('../server/js/send_msg.js');
+const { sendVerificationSMS } = require("../server/js/send_msg.js");
+
 //고객 정보
 var user={};
 let call_d;
@@ -269,6 +273,10 @@ router.post('/call/filter',(req,res)=>{
     }
     
 });
+
+//메세지 전송 기능
+router.get('/call/send',sendVerificationSMS);
+
 
 //auth 데이터 불러오기
 router.get('/auth', (req, res) => {
