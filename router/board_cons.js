@@ -13,31 +13,52 @@ let cons_d;//accessor
 
 //consultant
 router.get('/company/cons', (req, res) => {
-    const sql = "SELECT * FROM g_consultant";
-    connection.query(sql,(err, result,field)=>{
-        if(err) throw err;
-        // console.log(result);
-        cons_d =result;
-        
-            //console.log(req.session.users);
-        //고객정보 session으로 받아오기
-        user.ID = req.session.users.user_ID;
-        user.PW = req.session.users.user_PW;
-        user.CP = req.session.users.user_CP;
+    user.ID = req.session.users.user_ID;
+    user.PW = req.session.users.user_PW;
+    user.CP = req.session.users.user_CP;
 
-        connection.query('SELECT * FROM g_consultant WHERE conID = ?',[user.ID], function(error, result_user){
-            if(error) throw error;
-            user.AUTH = result_user[0].authCD;
-            user.NAME = result_user[0].cpNM;
-        })
-
-        res.render('consultant',{
-            accessor : user, 
-            consultant:result,
-            status: "hide",
-        });       
-    });
-})
+    connection.query('SELECT * FROM g_consultant WHERE conID = ?',[user.ID], function(error, result_user){
+        if(error) throw error;
+        user.AUTH = result_user[0].authCD;
+        user.NAME = result_user[0].cpNM;
+    })
+    let sql;
+    // 권한 부여 
+    if (user.AUTH==1){ //superadmin
+        sql = "SELECT * FROM g_consultant";
+        connection.query(sql,(err, result,field)=>{
+            cons_d = result
+            res.render('consultant',{
+                accessor : user, 
+                consultant:cons_d,
+                status: "hide",
+                buttonStatus : ['block','block','block'] // create, edit, delete 순 
+            });     
+        });
+    }else if(user.AUTH==2){ //companyadmin
+        sql = "SELECT * FROM g_consultant WHERE cpID = ?";
+        connection.query(sql,user.CP,(err, result,field)=>{
+            cons_d = result
+            res.render('consultant',{
+                accessor : user, 
+                consultant:cons_d,
+                status: "hide",
+                buttonStatus : ['block','block','block']
+            });     
+        });
+    }else{ //consultant
+        sql = "SELECT * FROM g_consultant WHERE conID = ?";
+        connection.query(sql,user.ID,(err, result,field)=>{
+            cons_d = result
+            res.render('consultant',{
+                accessor : user, 
+                consultant:cons_d,
+                status: "hide",
+                buttonStatus : ['none','block','none']
+            });     
+        });
+    }
+});
 
 //-consultant 추가
 router.post('/company/cons',(req,res)=>{

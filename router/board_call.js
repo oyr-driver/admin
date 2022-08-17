@@ -143,6 +143,7 @@ router.get('/call', (req, res) => {
 //-call 추가
 router.post('/call/create',(req,res)=>{
     const sql = "INSERT INTO g_call SET ? "
+
     connection.query(sql,req.body, (err,result,fields)=>{
         if(err) throw err;
         // console.log(result);
