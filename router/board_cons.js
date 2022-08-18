@@ -46,10 +46,10 @@ router.get('/company/cons', (req, res) => {
                 buttonStatus : ['block','block','block']
             });     
         });
-    }else{ //consultant
-        sql = "SELECT * FROM g_consultant WHERE conID = ?";
-        connection.query(sql,user.ID,(err, result,field)=>{
-            cons_d = result
+    }else if (user.AUTH === 3){ //consultant
+        sql = "SELECT * FROM g_consultant WHERE conID = ? and cpID = ? ";
+        connection.query(sql,[user.ID,user.CP],(err, result,field)=>{
+            cons_d = result;
             res.render('consultant',{
                 accessor : user, 
                 consultant:cons_d,
