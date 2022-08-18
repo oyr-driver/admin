@@ -17,10 +17,6 @@ let call_d;
 let call_cons_d;
 let filter_cons_name = "ALL";//filter기능 사용할 상담원 id 저장
 
-//새로운 flag
-let flag_user_distinct;
-
-let flag = 0;
 //filter기능 이용 후 call정보 update(submit)시 filter 후의 정보가 뜨는 것이 아니라 전체 정보가 
 //다 보임. 이를 flag를 이용하여 get에 접근했는지 안했는지로 정함 
 // 0 접근 안함, 1 접근함
@@ -32,16 +28,16 @@ router.get('/call', (req, res) => {
     user.ID = req.session.users.user_ID;
     user.PW = req.session.users.user_PW;
     user.CP = req.session.users.user_CP;
-
+    user.FLAG = req.session.users.flag;
 
 
     connection.query('SELECT * FROM g_consultant WHERE conID = ?',[user.ID], function(error, result){
         if(error) throw error;
         user.AUTH = result[0].authCD;
         user.NAME = result[0].cpNM;
-        console.log("flag :"+ flag);
+        console.log("user.FLAG :"+ user.FLAG);
 
-        if(flag === 0){//filter사용 전
+        if(user.FLAG === 0){//filter사용 전
             filter_cons_name = "ALL";
             if(user.AUTH === 1){
                 //super관리자 전체 노출
@@ -90,8 +86,8 @@ router.get('/call', (req, res) => {
                     })
                 });
             }
-        }else if(flag === 1){//filter사용 후
-            flag =0;
+        }else if(user.FLAG === 1){//filter사용 후
+            user.FLAG =0;
             if(user.AUTH === 1){
                 //super관리자 전체 노출
                 //filtering을 위한 상담원 정보 받아 오기, call_cons_d
@@ -208,7 +204,7 @@ router.get('/call/delete/:id',(req,res)=>{
 
 //-filter기능
 router.post('/call/filter',(req,res)=>{
-    flag = 1;// filter기능 사용
+    user.FLAG = 1;// filter기능 사용
     filter_cons_name = req.body.conID;//filter select box안에 정보 저장
     //super관리자의 경우
     if(user.AUTH === 1 ){

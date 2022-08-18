@@ -1,0 +1,12 @@
+//브랜치 이동
+git checkout -v [브랜치]
+
+//파일 push
+git add .
+git commit -m "원하는 내용"
+git push origin [브랜치]
+git push
+
+//env파일 빼기
+
+
