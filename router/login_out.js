@@ -7,6 +7,11 @@ const mysql = require('mysql');
 const dbconfig = require('../config/database.js');//db router
 const connection = mysql.createConnection(dbconfig);
 
+// const flag = '0';
+// module.exports = flag;
+const pv = 'primitive value';
+module.exports = pv;
+
 router.get('/login', (req, res) => {
     res.render('login');
 });

@@ -1,4 +1,4 @@
-//라우터 쪼개기
+//라우터 쪼개기, 라우터 레벨 미들웨어
 const express = require('express');
 const router =  express.Router();
 
@@ -17,6 +17,9 @@ let call_d;
 let call_cons_d;
 let filter_cons_name = "ALL";//filter기능 사용할 상담원 id 저장
 
+//새로운 flag
+let flag_user_distinct;
+
 let flag = 0;
 //filter기능 이용 후 call정보 update(submit)시 filter 후의 정보가 뜨는 것이 아니라 전체 정보가 
 //다 보임. 이를 flag를 이용하여 get에 접근했는지 안했는지로 정함 
@@ -30,13 +33,16 @@ router.get('/call', (req, res) => {
     user.PW = req.session.users.user_PW;
     user.CP = req.session.users.user_CP;
 
+
+
     connection.query('SELECT * FROM g_consultant WHERE conID = ?',[user.ID], function(error, result){
         if(error) throw error;
         user.AUTH = result[0].authCD;
         user.NAME = result[0].cpNM;
+        console.log("flag :"+ flag);
 
         if(flag === 0){//filter사용 전
-            flag =1;
+            filter_cons_name = "ALL";
             if(user.AUTH === 1){
                 //super관리자 전체 노출
                 const sql1 = "SELECT * FROM g_call";
@@ -85,6 +91,7 @@ router.get('/call', (req, res) => {
                 });
             }
         }else if(flag === 1){//filter사용 후
+            flag =0;
             if(user.AUTH === 1){
                 //super관리자 전체 노출
                 //filtering을 위한 상담원 정보 받아 오기, call_cons_d

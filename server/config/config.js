@@ -1,12 +1,11 @@
 //dotenv는 환경변수를 .env라는 파일에 저장하고
 //process.env로 로드하는 의존성 모듈
 const dotenv = require("dotenv");
-
 dotenv.config();
 
 function required(key, defaultValue = undefined) {
     const value = process.env[key] || defaultValue;
-    console.log("출력 "+ process.env);
+    // console.log("출력 "+ process.env);
     if (value == null) {
         throw new Error(`Key ${key} is undefined`);
     }
@@ -21,3 +20,4 @@ module.exports = {
         callNumber: required("NCP_SENS_NUMBER"),
     },
 };
+
