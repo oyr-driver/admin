@@ -18,7 +18,6 @@ let call_cons_d;
 let filter_cons_name = "ALL";//filter기능 사용할 상담원 id 저장
 
 //새로운 user.FLAG
-
 //filter기능 이용 후 call정보 update(submit)시 filter 후의 정보가 뜨는 것이 아니라 전체 정보가 
 //다 보임. 이를 user.FLAG를 이용하여 get에 접근했는지 안했는지로 정함 
 // 0 접근 안함, 1 접근함
@@ -88,7 +87,7 @@ router.get('/call', (req, res) => {
                 });
             }
         }else if(user.FLAG === 1){//filter사용 후
-            user.FLAG=0;
+            user.FLAG =0;
             if(user.AUTH === 1){
                 //super관리자 전체 노출
                 //filtering을 위한 상담원 정보 받아 오기, call_cons_d
