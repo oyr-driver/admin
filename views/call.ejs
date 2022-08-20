@@ -383,7 +383,7 @@
                                         </div>
                                         <div class="position-relative row form-check">
                                             <div class="col-sm-10 offset-sm-2">
-                                                <button class="btn btn-success" style="width:440px; float:right;" onclick="location.href='/call/send/'">Send Message</button>
+                                                <button class="btn btn-success" style="width:440px; float:right;" onclick="location.href='/call/send/<%=call_data[0].callID %>'" >Send Message</button>
                                             </div>
                                         </div>
                                         <form class="" action="/call/update/<%= call_data[0].callID %>" method="post" >

@@ -30,9 +30,12 @@ router.post('/call', (req, res) => {
                 req.session.users = {
                     user_ID: conID,
                     user_PW:pw,
-                    user_CP: cpID 
+                    user_CP: cpID,
+                    flag :0 
                 };
-                
+                //filter기능 이용 후 call정보 update(submit)시 filter 후의 정보가 뜨는 것이 아니라 전체 정보가 
+                //다 보임. 이를 user.FLAG를 이용하여 get에 접근했는지 안했는지로 정함 
+                // 0 접근 안함, 1 접근함
                 console.log('로그인 성공');
                 console.log("id: "+req.session.users.user_ID + ", pw: "+ req.session.users.user_PW + ", cp: "+req.session.users.user_CP);
                 res.redirect('call');

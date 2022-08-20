@@ -47,7 +47,7 @@ module.exports = {
                 method: method,
                 url: url,
                 headers: {
-                "Contenc-type": "application/json; charset=utf-8",
+                "Content-type": "application/json; charset=utf-8",
                 "x-ncp-iam-access-key": sens_access_key,
                 "x-ncp-apigw-timestamp": date
                 ,
