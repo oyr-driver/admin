@@ -35,7 +35,7 @@ router.get('/call', (req, res) => {
         if(error) throw error;
         user.AUTH = result[0].authCD;
         user.NAME = result[0].cpNM;
-        console.log("user.FLAG :"+ user.FLAG);
+        //console.log("user.FLAG :"+ user.FLAG);
 
         if(user.FLAG === 0){//filter사용 전
             filter_cons_name = "ALL";
@@ -279,10 +279,7 @@ router.post('/call/filter',(req,res)=>{
 });
 
 //메세지 전송 기능
-router.get('/call/send/:id',(req,res)=>{
-    console.log("im here!");
-    sendVerificationSMS}
-    );
+router.get('/call/send/:id',sendVerificationSMS);
 
 
 //auth 데이터 불러오기

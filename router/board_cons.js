@@ -24,18 +24,22 @@ router.get('/company/cons', (req, res) => {
     })
     let sql;
     // 권한 부여 
-    if (user.AUTH==1){ //superadmin
+    if (user.AUTH==1){ 
+        //superadmin : 전체 노출
+        //crud 기능 다 됨 
         sql = "SELECT * FROM g_consultant";
         connection.query(sql,(err, result,field)=>{
             cons_d = result
             res.render('consultant',{
                 accessor : user, 
                 consultant:cons_d,
-                status: "hide",
-                buttonStatus : ['block','block','block'] // create, edit, delete 순 
+                status: "hide", // create, edit, delete 순 
+                create_btn: 'show'
             });     
         });
-    }else if(user.AUTH==2){ //companyadmin
+    }else if(user.AUTH==2){ 
+        //companyadmin : 해당 회사만 노출
+        //crud 기능 다 됨 
         sql = "SELECT * FROM g_consultant WHERE cpID = ?";
         connection.query(sql,user.CP,(err, result,field)=>{
             cons_d = result
@@ -43,10 +47,12 @@ router.get('/company/cons', (req, res) => {
                 accessor : user, 
                 consultant:cons_d,
                 status: "hide",
-                buttonStatus : ['block','block','block']
+                create_btn: 'show'
             });     
         });
-    }else if (user.AUTH === 3){ //consultant
+    }else if (user.AUTH === 3){ 
+        //consultant : 자신만 노출
+        //create, delete 안됨, edit 됨 
         sql = "SELECT * FROM g_consultant WHERE conID = ? and cpID = ? ";
         connection.query(sql,[user.ID,user.CP],(err, result,field)=>{
             cons_d = result;
@@ -54,7 +60,7 @@ router.get('/company/cons', (req, res) => {
                 accessor : user, 
                 consultant:cons_d,
                 status: "hide",
-                buttonStatus : ['none','block','none']
+                create_btn : 'hide'
             });     
         });
     }

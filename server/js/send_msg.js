@@ -6,7 +6,8 @@ module.exports = {
     sendVerificationSMS: async (req, res) => {
         try {
             // const { tel } = req.body;
-            var tel = "01046141099";
+            // var tel = "01046141099";
+            var tel = req.body.cPhone;
             // const user_phone_number = tel.split("-").join(""); // SMS를 수신할 전화번호
             const user_phone_number = tel; // SMS를 수신할 전화번호
             // const verificationCode = createRandomNumber(6); // 인증 코드 (6자리 숫자)
@@ -63,7 +64,7 @@ module.exports = {
                 },
             });
             console.log("response", smsRes.data);
-            return res.status(200).json({ message: "SMS sent" });
+            return res.redirect('./call');
             } catch (err) {
             console.log(err);
             return res.status(404).json({ message: "SMS not sent" });
