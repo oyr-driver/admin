@@ -318,10 +318,10 @@
                                             <h5 class="card-title" style="font-size: 1.5rem; margin-top: 5px;">Create new</h5>
                                         </div>
                                         <form class="" action="/company/com" method="post" >
-                                            <div class="position-relative form-group">
+                                            <!-- <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>cpID</label>
                                                 <input name="cpID" id="exampleEmail11"  type="text" class="form-control" >
-                                            </div>
+                                            </div> -->
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>cpNM</label>
                                                 <input name="cpNM" id="exampleEmail11"  type="text" class="form-control">
@@ -356,7 +356,7 @@
                                         <form class="" action="/company/com/update/<%= com_data[0].cpID %>" method="post" >
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>cpID</label>
-                                                <input name="cpID" id="exampleEmail11"  type="text" class="form-control" value="<%= com_data[0].cpID %>">
+                                                <input name="cpID" id="exampleEmail11"  type="text" class="form-control" value="<%= com_data[0].cpID %>" readonly>
                                             </div>
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>cpNM</label>

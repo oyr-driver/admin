@@ -8,7 +8,7 @@ const dbconfig = require('../config/database.js');//db router
 const connection = mysql.createConnection(dbconfig);
 
 //메세지 전송 기능 모듈
-const send_message = require('../server/js/send_msg.js');
+// const send_message = require('../server/js/send_msg.js');
 const { sendVerificationSMS } = require("../server/js/send_msg.js");
 
 //고객 정보
@@ -35,7 +35,7 @@ router.get('/call', (req, res) => {
         if(error) throw error;
         user.AUTH = result[0].authCD;
         user.NAME = result[0].cpNM;
-        console.log("user.FLAG :"+ user.FLAG);
+        // console.log("user.FLAG :"+ user.FLAG);
 
         if(user.FLAG === 0){//filter사용 전
             filter_cons_name = "ALL";
@@ -279,7 +279,10 @@ router.post('/call/filter',(req,res)=>{
 });
 
 //메세지 전송 기능
-router.get('/call/send',sendVerificationSMS);
+router.get('/call/message/:id',(req,res)=>{
+    console.log("hi");
+    sendVerificationSMS
+});
 
 
 //auth 데이터 불러오기

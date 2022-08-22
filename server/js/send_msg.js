@@ -47,7 +47,7 @@ module.exports = {
                 method: method,
                 url: url,
                 headers: {
-                "Contenc-type": "application/json; charset=utf-8",
+                "Content-type": "application/json; charset=utf-8",
                 "x-ncp-iam-access-key": sens_access_key,
                 "x-ncp-apigw-timestamp": date
                 ,
@@ -64,9 +64,11 @@ module.exports = {
             });
             console.log("response", smsRes.data);
             return res.status(200).json({ message: "SMS sent" });
-            } catch (err) {
+            }
+            catch (err) {
             console.log(err);
             return res.status(404).json({ message: "SMS not sent" });
             }
+            
         },
     };

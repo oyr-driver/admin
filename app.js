@@ -50,7 +50,11 @@ connection.connect();
 // })
 connection.end();
 
+// server.listen(port, () => {
+//     console.log(`Server running at http://localhost:${port}`);
+// });
+
 server.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
+  console.log(`Server running at http://localhost:${port}`);
 });
 
