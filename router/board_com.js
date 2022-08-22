@@ -70,11 +70,15 @@ router.get('/company/com', (req, res) => {
 
 //-company 추가
 router.post('/company/com',(req,res)=>{
-    const sql = "INSERT INTO g_company SET ?"
-    connection.query(sql,req.body, (err,result,fields)=>{
-        if(err) throw err;
-        console.log("회사 추가: "+result);
-        res.redirect('/company/com');
+    connection.query('SELECT SUBSTR(MD5(RAND()),1,8) AS RandomString', (err, result, fields)=>{
+        console.log(result[0].RandomString)
+        req.body.cpID = result[0].RandomString //cpID로 랜덤 문자열 배정 
+        const sql = "INSERT INTO g_company SET ?"
+        connection.query(sql,req.body, (err,result,fields)=>{
+            if(err) throw err;
+            console.log("회사 추가: "+result);
+            res.redirect('/company/com');
+        })
     })
 })
 
