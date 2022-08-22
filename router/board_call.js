@@ -279,11 +279,9 @@ router.post('/call/filter',(req,res)=>{
 });
 
 //메세지 전송 기능
-router.get('/call/message/:id',(req,res)=>{
-    console.log("hi");
-    sendVerificationSMS
-});
-
+//res,req는 왜 안될까?
+// router.get('/call/message/:id',sendVerificationSMS,);
+router.post('/call/message/:id',sendVerificationSMS,);
 
 //auth 데이터 불러오기
 router.get('/auth', (req, res) => {
