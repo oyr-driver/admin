@@ -64,10 +64,12 @@ module.exports = {
                 },
             });
             console.log("response", smsRes.data);
-            return res.redirect('./call');
-            } catch (err) {
+            // return res.status(200).json({ message: "SMS sent" });
+            return res.redirect('/call');
+            }catch (err) {
             console.log(err);
             return res.status(404).json({ message: "SMS not sent" });
             }
+            
         },
     };
