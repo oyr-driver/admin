@@ -70,6 +70,7 @@ router.get('/company/com', (req, res) => {
 
 //-company 추가
 router.post('/company/com',(req,res)=>{
+
     //열 이름을 RandomString으로 선언
     connection.query('SELECT SUBSTR(MD5(RAND()),1,8) AS RandomString', (err, result, fields)=>{
         console.log(result[0].RandomString)

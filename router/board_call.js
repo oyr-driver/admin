@@ -17,8 +17,9 @@ let call_d;
 let call_cons_d;
 let filter_cons_name = "ALL";//filter기능 사용할 상담원 id 저장
 
+//새로운 user.FLAG
 //filter기능 이용 후 call정보 update(submit)시 filter 후의 정보가 뜨는 것이 아니라 전체 정보가 
-//다 보임. 이를 flag를 이용하여 get에 접근했는지 안했는지로 정함 
+//다 보임. 이를 user.FLAG를 이용하여 get에 접근했는지 안했는지로 정함 
 // 0 접근 안함, 1 접근함
 
 //로그인
@@ -29,7 +30,6 @@ router.get('/call', (req, res) => {
     user.PW = req.session.users.user_PW;
     user.CP = req.session.users.user_CP;
     user.FLAG = req.session.users.flag;
-
 
     connection.query('SELECT * FROM g_consultant WHERE conID = ?',[user.ID], function(error, result){
         if(error) throw error;

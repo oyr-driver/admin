@@ -209,10 +209,12 @@
                                     </div>
                                 </div>
                                 <div class="page-title-actions">
+                                    <% if(locals.create_btn==='show'){%>
                                     <button type="button" data-toggle="tooltip" title="Example Tooltip" data-placement="bottom" class="mb-2 mr-2 btn btn-primary" onclick="getShow()">
                                         <!-- <i class="fa fa-star"></i> -->
                                         + Create new
                                     </button>
+                                    <%}%>
                                     <div class="d-inline-block dropdown">
                                         <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="mb-2 mr-2 btn-transition btn btn-outline-info">
                                             <span class="btn-icon-wrapper pr-2 opacity-7">
@@ -369,8 +371,12 @@
                                         </div>
                                         <form class="" action="/company/cons/update/<%= cons_data[0].conID %>" method="post" >
                                             <div class="position-relative form-group">
+                                                <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>cpID</label>
+                                                <input name="cpID" id="exampleEmail11"  type="text" class="form-control" value="<%= cons_data[0].cpID %>" readonly>
+                                            </div>
+                                            <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>conNM</label>
-                                                <input name="conNM" id="exampleEmail11"  type="text" class="form-control" value="<%= cons_data[0].conNM %>">
+                                                <input name="conNM" id="exampleEmail11"  type="text" class="form-control" value="<%= cons_data[0].conNM %>" readonly>
                                             </div>
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>conID</label>
@@ -388,10 +394,6 @@
                                                     <option value="2">2</option>
                                                     <option value="3">3</option>
                                                 </select>
-                                            </div>
-                                            <div class="position-relative form-group">
-                                                <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>cpID</label>
-                                                <input name="cpID" id="exampleEmail11"  type="text" class="form-control" value="<%= cons_data[0].cpID %>">
                                             </div>
                                             <div class="position-relative row form-check">
                                                 <div class="col-sm-10 offset-sm-2">
