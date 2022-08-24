@@ -216,12 +216,31 @@
                                     </button>
                                     <%}%>
                                     <div class="d-inline-block dropdown">
-                                        <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="mb-2 mr-2 btn-transition btn btn-outline-info">
+                                        <!-- <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="mb-2 mr-2 btn-transition btn btn-outline-info">
                                             <span class="btn-icon-wrapper pr-2 opacity-7">
                                                 <i class="fa pe-7s-edit fa-w-20"></i>
                                             </span>
                                             Filter
-                                        </button>
+                                        </button> -->
+                                        <% if (locals.filter_status === "show") {%>
+                                            <form class="" action="/consultant/filter" method="post" style="display: flex;">
+                                                <div class="position-relative row form-check">
+                                                    <select name="cpID" id="exampleSelect" class="form-control">
+                                                        <option value="<%= locals.filter_com_name %>">now: <%= locals.filter_com_name %></option>
+                                                        <option value="ALL">ALL</option>
+                                                        <% cons_com_d.forEach(function(value){ %>
+                                                        <option value="<%= value.cpID %>"><%= value.cpID %></option>
+                                                        <% }); %>
+                                                    </select>
+                                                </div>
+                                                <div class="position-relative row form-check">
+                                                    <div class="col-sm-10 offset-sm-2">
+                                                        <!-- <button class="btn btn-secondary" style="width:440px; float:right;" >Submit</button>-->
+                                                        <button class="mb-2 mr-2 btn-transition btn btn-outline-info" style="font-size: 1rem;">OK</button>
+                                                    </div>
+                                                </div>
+                                            </form> 
+                                        <% } %>
                                         <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
                                             <ul class="nav flex-column">
                                                 <li class="nav-item">
