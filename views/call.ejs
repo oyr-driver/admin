@@ -384,10 +384,16 @@
                                         <form action="/call/message/<%= call_data[0].callID %>" method="post">
                                             <div class="position-relative row form-check">
                                                 <div class="col-sm-10 offset-sm-2">
-                                                    <button class="btn btn-success" style="width:440px; float:right;" onclick="location.href='/call/message/<%= call_data[0].callID %>'">
+                                                    <button class="btn btn-success" style="width:440px; float:right;">
                                                         Send Message
                                                     </button>
                                                 </div>
+                                            </div>
+                                            <div class="position-relative form-group" style="display:none;">
+                                                <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>Status</label>
+                                                <select name="status" id="exampleSelect" class="form-control" >
+                                                    <option value="<%= call_data[0].status%>">now: <%= call_data[0].status%></option>
+                                                </select>
                                             </div>
                                             <div class="position-relative form-group" style="display:none;">
                                                 <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>cPhone</label>

@@ -64,7 +64,7 @@
                 <div class="app-header-left">
                     <div class="search-wrapper">
                         <div class="input-holder">
-                            <input type="text" class="search-input" placeholder="Type to search">
+                            <input type="text" class="search-input" placeholder="Type to search" id="value_num" onkeyup="filter_number()">
                             <button class="search-icon"><span></span></button>
                         </div>
                         <button class="close"></button>
@@ -216,12 +216,12 @@
                                     </button>
                                     <% } %>
                                     <div class="d-inline-block dropdown">
-                                        <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="mb-2 mr-2 btn-transition btn btn-outline-info">
+                                        <!-- <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="mb-2 mr-2 btn-transition btn btn-outline-info">
                                             <span class="btn-icon-wrapper pr-2 opacity-7">
                                                 <i class="fa pe-7s-edit fa-w-20"></i>
                                             </span>
                                             Filter
-                                        </button>
+                                        </button> -->
                                         <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
                                             <ul class="nav flex-column">
                                                 <li class="nav-item">
@@ -279,10 +279,10 @@
                                             <tbody>
                                                 <% let i =0; %>
                                                 <% company.forEach(function (value){ %>
-                                            <tr onclick="location.href='/company/com/<%= value.cpID %>'; getEdit();">
+                                            <tr class="item_num" onclick="location.href='/company/com/<%= value.cpID %>'; getEdit();">
                                                 <th scope="row"><%= ++i %></th>
                                                 <td><%= value.cpID %></td>
-                                                <td><%= value.cpNM %></td>
+                                                <td class="company_name"><%= value.cpNM %></td>
                                                 <td><%= value.cpPhone %></td>
                                             </tr>
                                                 <% }); %>
@@ -486,8 +486,28 @@
         document.getElementById("edit_area").style.right = "-32rem";
 
     }
-    </script>
 
+    //회사정보 검색기능 구현
+    function filter_number(){
+        var value, name, item,i,j;
+        var textList = [];
+        value = document.getElementById("value_num").value.toUpperCase();
+        item = document.getElementsByClassName("item_num");
+
+        for(i=0;i<item.length;i++){
+            name = item[i].getElementsByClassName("company_name");
+            if(name[0].innerHTML.toUpperCase().indexOf(value) > -1){
+                item[i].style.visibility = "visible";
+                for(j=0;j<name.length;j++){
+                    textList.push(name[j].innerText);
+                }
+            }else{
+                item[i].style.visibility = "collapse";//안보이게
+                console.log("delet : "+ name);
+            }
+        }
+    }
+    </script>
 <script type="text/javascript" src="/scripts/main.js"></script>
 </body>
 </html>

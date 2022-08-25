@@ -43,33 +43,45 @@ module.exports = {
             const signature = hash.toString(CryptoJS.enc.Base64);
             console.log(5);
         
-            // sens 서버로 요청 전송
-            const smsRes = await axios({
-                method: method,
-                url: url,
-                headers: {
-                "Content-type": "application/json; charset=utf-8",
-                "x-ncp-iam-access-key": sens_access_key,
-                "x-ncp-apigw-timestamp": date
-                ,
-                "x-ncp-apigw-signature-v2": signature,
-                },
-                data: {
-                type: "SMS",
-                countryCode: "82",
-                from: sens_call_number,
-                // content: `인증번호는 [${verificationCode}] 입니다.`,
-                content: `hi`,
-                messages: [{ to: `${user_phone_number}` }],
-                },
-            });
-            console.log("response", smsRes.data);
-            // return res.status(200).json({ message: "SMS sent" });
-            return res.redirect('/call');
-            }catch (err) {
-            console.log(err);
-            return res.status(404).json({ message: "SMS not sent" });
-            }
+            // //sens 서버로 요청 전송
+            // const smsRes = await axios({
+            //     method: method,
+            //     url: url,
+            //     headers: {
+            //     "Content-type": "application/json; charset=utf-8",
+            //     "x-ncp-iam-access-key": sens_access_key,
+            //     "x-ncp-apigw-timestamp": date
+            //     ,
+            //     "x-ncp-apigw-signature-v2": signature,
+            //     },
+            //     data: {
+            //     type: "SMS",
+            //     countryCode: "82",
+            //     from: sens_call_number,
+            //     // content: `인증번호는 [${verificationCode}] 입니다.`,
+            //     content: `hi`,
+            //     messages: [{ to: `${user_phone_number}` }],
+            //     },
+            // });
             
-        },
-    };
+            // console.log("response", smsRes.data);
+            // return res.status(200).json({ message: "SMS sent" });
+            // return res.redirect('/call');
+            return res.send(`<script>
+                                alert('${user_phone_number} 메세지 전송 성공');
+                                location.href='/call';
+                                //status 2로 변환 필요
+                            </script>`
+                            );
+        }
+        catch (err) {
+            console.log(err);
+            // return res.status(404).json({ message: "SMS not sent" });
+            return res.send(`<script>
+                                alert('${user_phone_number} 메세지 전송 실패');
+                                location.href='/call';
+                            </script>`
+                            );
+        }
+    },
+};

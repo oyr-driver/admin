@@ -279,7 +279,7 @@ router.post('/call/filter',(req,res)=>{
 });
 
 //메세지 전송 기능
-//res,req는 왜 안될까?
+//res,req는 왜 안될까? ==> (req,res) => {(req,res)} 형태로 존재하게 됨 그래서 작동 안함
 // router.get('/call/message/:id',sendVerificationSMS,);
 router.post('/call/message/:id',sendVerificationSMS,);
 
