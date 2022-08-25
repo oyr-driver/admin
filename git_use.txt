@@ -11,3 +11,6 @@ git push
 .gitignore 사용
 
 
+//git pull받는 법
+git remote -v
+git pull origin [브랜치]

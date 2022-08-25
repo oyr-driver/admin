@@ -95,7 +95,8 @@ router.get('/company/com/:id',(req,res)=>{
                 company:com_d,
                 accessor : user,
                 com_data: result,
-                status:"show_auth_one"//edit erea 구분
+                status:"show_auth_one",//edit erea 구분
+                create_btn:"show"
             });
         }
         else if (user.AUTH === 2){
@@ -103,6 +104,7 @@ router.get('/company/com/:id',(req,res)=>{
                 company:com_d,
                 accessor : user,
                 com_data: result,
+                create_btn:"hide",
                 status:"show_auth_two"//edit erea 구분
             });
         }
