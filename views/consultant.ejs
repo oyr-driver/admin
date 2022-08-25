@@ -64,7 +64,8 @@
                 <div class="app-header-left">
                     <div class="search-wrapper">
                         <div class="input-holder">
-                            <input type="text" class="search-input" placeholder="Type to search">
+                            <!-- 검색 기능 구현 -->
+                            <input type="text" class="search-input" placeholder="Type to search number" id="value_num" onkeyup="filter_number()">
                             <button class="search-icon"><span></span></button>
                         </div>
                         <button class="close"></button>
@@ -300,10 +301,10 @@
                                             <tbody>
                                                 <% let i =0; %>
                                                 <% consultant.forEach(function (value) { %>
-                                            <tr onclick="location.href='/company/cons/<%= value.conID %>'; getEdit();">
+                                            <tr class='item_num' onclick="location.href='/company/cons/<%= value.conID %>'; getEdit();">
                                                 <th scope="row"><%= ++i %></th>
                                                 <td><%= value.conNM %></td>
-                                                <td><%= value.conID %></td>
+                                                <td class="name_num"><%= value.conID %></td>
                                                 <td><%= value.conPW %></td>
                                                 <td><%= value.authCD %></td>
                                                 <td><%= value.cpID %></td>
@@ -495,6 +496,26 @@
 
     function getSave(){
         document.getElementById("edit_area").style.right = "-30rem";
+    }
+    //상담원 검색기능 구현
+    function filter_number(){
+        var value, name, item,i,j;
+        var textList = [];
+        value = document.getElementById("value_num").value.toUpperCase();
+        item = document.getElementsByClassName("item_num");
+
+        for(i=0;i<item.length;i++){
+            name = item[i].getElementsByClassName("name_num");
+            if(name[0].innerHTML.toUpperCase().indexOf(value) > -1){
+                item[i].style.visibility = "visible";
+                for(j=0;j<name.length;j++){
+                    textList.push(name[j].innerText);
+                }
+            }else{
+                item[i].style.visibility = "collapse";//안보이게
+                console.log("delet : "+ name);
+            }
+        }
     }
     </script>
 
