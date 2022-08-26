@@ -130,7 +130,7 @@ router.get('/company/cons/:id',(req,res)=>{
             accessor : user,
             cons_data: result,
             status:"show",
-            create_btn:"show",
+            create_btn : 'show',
             filter_status:"show"
         });
     });

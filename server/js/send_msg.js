@@ -2,9 +2,15 @@ const { sens } = require("../config/config.js");
 const CryptoJS = require("crypto-js");//암호화를 위한 CryptoJS모듈
 const axios = require("axios");
 
+//mysql연동
+const mysql = require('mysql');
+const dbconfig = require('../../config/database.js');//db router
+const connection = mysql.createConnection(dbconfig);
+
 module.exports = {
     sendVerificationSMS: async (req, res) => {
         try {
+            console.log(req.body);
             // const { tel } = req.body;
             // var tel = "01046141099";
             var tel = req.body.cPhone;
@@ -68,6 +74,10 @@ module.exports = {
             // return res.status(200).json({ message: "SMS sent" });
             // return res.redirect('/call');
             
+            const sql = "UPDATE g_call SET status='2' WHERE callID = ?";
+            connection.query(sql,[req.body.callID],(err,result,fields)=>{
+                if(err) throw err;
+            })
             return res.send(`<script>
                                 alert('${user_phone_number} 메세지 전송 성공');
                                 location.href='/call';
