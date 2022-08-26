@@ -17,6 +17,7 @@ let call_d;
 let call_cons_d;
 let filter_cons_name = "ALL";//filter기능 사용할 상담원 id 저장
 
+
 //새로운 user.FLAG
 //filter기능 이용 후 call정보 update(submit)시 filter 후의 정보가 뜨는 것이 아니라 전체 정보가 
 //다 보임. 이를 user.FLAG를 이용하여 get에 접근했는지 안했는지로 정함 
@@ -145,13 +146,17 @@ router.get('/call', (req, res) => {
 //call
 //-call 추가
 router.post('/call/create',(req,res)=>{
-    const sql = "INSERT INTO g_call SET ? "
+    connection.query('SELECT SUBSTR(MD5(RAND()),1,8) AS RandomString', (err, result, fields)=>{
+        req.body.callID = result[0].RandomString;
+        const sql = "INSERT INTO g_call SET ? "
 
-    connection.query(sql,req.body, (err,result,fields)=>{
-        if(err) throw err;
-        // console.log(result);
-        res.redirect('/call');
-    })
+        connection.query(sql,req.body, (err,result,fields)=>{
+            if(err) throw err;
+            // console.log(result);
+            res.redirect('/call');
+        })
+    });
+    
 })
 
 //-edit파일로 이동
@@ -189,6 +194,7 @@ router.post('/call/update/:id',(req,res)=>{
     const sql = "UPDATE g_call SET ? WHERE callID = ?";
     connection.query(sql,[req.body, req.params.id],(err,result,fields)=>{
         if(err) throw err;
+        console.log(req.body);
         res.redirect('/call');
     })
 })
@@ -293,4 +299,17 @@ router.get('/auth', (req, res) => {
     });
 })
 
+router.post('/call/message/:id/imgsubmit', (req, res)=>{
+    console.log(req.body);
+    const sql = "UPDATE g_call SET imgUrl = ?, imgExplain = ? WHERE callID = ?";
+    connection.query(sql,[req.body.dataUrl, req.body.text, req.params.id],(err,result,fields)=>{
+        if(err) throw err;
+        res.redirect('/call');
+    })
+//    const sql = "UPDATE g_call SET dataUrl =?  WHERE callID = ?";
+//     connection.query(sql,[req.body, req.params.id],(err,result,fields)=>{
+//         if(err) throw err;
+//         res.redirect('/call');
+//     })
+});
 module.exports = router;

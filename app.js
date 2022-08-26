@@ -9,6 +9,8 @@ const board_log_Router = require('./router/login_out.js');//로그인 라우터
 const bodyParser = require('body-parser');//body를 parsing해주는 미들웨어
 const expressSession=require('express-session');//session 사용할때 필요
 
+
+
 //mysql연동
 const mysql = require('mysql');
 const dbconfig = require('./config/database.js');//db router
@@ -17,6 +19,12 @@ const connection = mysql.createConnection(dbconfig);
 const app = express();
 const server = http.createServer(app);
 const port = 5000;
+
+// 클라이언트 접근 허용
+const cors = require('cors')
+
+app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+//{ credentials: true, origin: "http://localhost:3000" }
 
 //view engine setup
 app.set('views','./views');
