@@ -67,6 +67,7 @@ module.exports = {
             // console.log("response", smsRes.data);
             // return res.status(200).json({ message: "SMS sent" });
             // return res.redirect('/call');
+            
             return res.send(`<script>
                                 alert('${user_phone_number} 메세지 전송 성공');
                                 location.href='/call';

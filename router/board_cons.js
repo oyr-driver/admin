@@ -129,7 +129,9 @@ router.get('/company/cons/:id',(req,res)=>{
             consultant:cons_d,
             accessor : user,
             cons_data: result,
-            status:"show"
+            status:"show",
+            create_btn:"show",
+            filter_status:"show"
         });
     });
 });
