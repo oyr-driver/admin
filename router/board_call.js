@@ -300,22 +300,23 @@ router.get('/auth', (req, res) => {
 })
 
 //data 받기
-// router.post('/call/test',(req,res)=>{
-//     console.log(req.body.test);
-//     //callid req.params.id로 받아와야함
-//     //req.body
-//     const sql = "UPDATE g_call SET ? WHERE callID = ?";
-//     connection.query(sql,[req.body, req.params.id],(err,result,fields)=>{
-//         if(err) throw err;
-//         res.redirect('/call');
-//     })
-//     res.send(`<script>
-//                 location.href='http://localhost:8080/test1';
-//             </script>`)
-// })
+router.post('/call/test/:id',(req,res)=>{
+    console.log(req.body.dataUrl);
+    //callid req.params.id로 받아와야함
+    //req.body
+    const sql = "UPDATE g_call SET imgUrl = ?, imgExplain = ? WHERE callID = ?";
+    connection.query(sql,[req.body.dataUrl, req.body.text, req.params.id],(err,result,fields)=>{
+        if(err) throw err;
+        res.redirect('/call');
+    })
+    // res.send(`<script>
+    //             location.href='http://localhost:8080/test1';
+    //         </script>`)
+})
+
 
 router.post('/call/message/:id/imgsubmit', (req, res)=>{
-    console.log(req.body);
+    console.log(req.body.dataUrl);
     const sql = "UPDATE g_call SET imgUrl = ?, imgExplain = ? WHERE callID = ?";
     connection.query(sql,[req.body.dataUrl, req.body.text, req.params.id],(err,result,fields)=>{
         if(err) throw err;

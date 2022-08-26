@@ -381,6 +381,7 @@
                                             </button>
                                             <h5 class="card-title" style="font-size: 1.5rem; margin-top: 5px;">Edit</h5>
                                         </div>
+                                        <!-- 메세지 보내는 폼 -->
                                         <form action="/call/message/<%= call_data[0].callID %>" method="post">
                                             <div class="position-relative row form-check">
                                                 <div class="col-sm-10 offset-sm-2">
@@ -399,20 +400,17 @@
                                                 <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>cPhone</label>
                                                 <input name="cPhone" id="exampleEmail11"  type="text" class="form-control" value="<%= call_data[0].cPhone %>">
                                             </div>
-                                            <div class="position-relative form-group">
+                                            <div class="position-relative form-group" style="display:none;">
                                                 <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>callID</label>
                                                 <input name="callID" id="exampleEmail11"  type="text" class="form-control" value="<%= call_data[0].callID %>" readonly>
                                             </div>
                                         </form>
+                                        <!-- 고객 정보 update 하는 폼 -->
                                         <form class="" action="/call/update/<%= call_data[0].callID %>" method="post" >
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>callID</label>
                                                 <input name="callID" id="exampleEmail11"  type="text" class="form-control" value="<%= call_data[0].callID %>" readonly>
                                             </div>
-                                            <!-- <div class="position-relative form-group">
-                                                <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>userID</label>
-                                                <input name="userID" id="exampleEmail11"  type="text" class="form-control" value="<%= call_data[0].userID %>">
-                                            </div> -->
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class=""><span style="color: #4268F6;">*</span>cPhone</label>
                                                 <input name="cPhone" id="exampleEmail11"  type="text" class="form-control" value="<%= call_data[0].cPhone %>">
@@ -449,10 +447,6 @@
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class="">cpID(회사)</label>
                                                 <input name="cpID" id="exampleEmail11"  type="text" class="form-control" value="<%= call_data[0].cpID %>" readonly>
-                                            </div>
-                                            <div class="position-relative form-group">
-                                                <label for="exampleEmail11" class="">addDate</label>
-                                                <input  id="exampleEmail11"  type="datetime" class="form-control" value="<%= call_data[0].addDate %>" readonly>
                                             </div>
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail11" class="">addDate</label>
