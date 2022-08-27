@@ -165,7 +165,7 @@ router.get('/call/:id',(req,res)=>{
     const sql = "SELECT* FROM g_call WHERE callID = ?";
     connection.query(sql, [req.params.id], function(err,result,fields){
         if(err) throw err;
-        
+        console.log(result);
         //filer하는 버튼 노출 때문에 if문 사용
         if(user.AUTH === 1 || user.AUTH === 2 ){
             res.render('call',{
