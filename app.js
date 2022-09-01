@@ -18,6 +18,7 @@ const connection = mysql.createConnection(dbconfig);
 
 const app = express();
 const server = http.createServer(app);
+const hostname = '13.125.138.249';
 const port = 5000;
 
 // 클라이언트 접근 허용
@@ -65,7 +66,7 @@ connection.end();
 //     console.log(`Server running at http://localhost:${port}`);
 // });
 
-server.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+server.listen(port, hostname, () => {
+  console.log(`Server running at http://${hostname}:${port}`);
 });
 
