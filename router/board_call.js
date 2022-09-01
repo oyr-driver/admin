@@ -305,8 +305,6 @@ router.post('/call/message/:id/locsubmit', (req, res)=>{
     const sql = "UPDATE g_call SET sLat = ?, sLong = ?, sAddr = ? WHERE callID = ?";
     connection.query(sql,[req.body.lat, req.body.lon, req.body.loc, req.params.id],(err,result,fields)=>{
         if(err) throw err;
-        //axios.get('http://localhost:5000/call');
-        res.redirect('/call'); //랜더링 문제 해결해야 함!
     })
 
 });
@@ -316,7 +314,6 @@ router.post('/call/message/:id/imgsubmit', (req, res)=>{
     const sql = "UPDATE g_call SET imgUrl = ?, imgExplain = ? WHERE callID = ?";
     connection.query(sql,[req.body.dataUrl, req.body.text, req.params.id],(err,result,fields)=>{
         if(err) throw err;
-        res.redirect('/call');
     })
 });
 module.exports = router;
