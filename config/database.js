@@ -1,5 +1,5 @@
 module.exports = {
-    host:'127.0.0.1',
+    host:'localhost',
     user: 'root',
     password:'0000',
     database:'gooddrive',
