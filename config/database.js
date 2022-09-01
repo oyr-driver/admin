@@ -1,6 +1,7 @@
 module.exports = {
-    host:'localhost',
+    host:'13.125.138.249',
     user: 'root',
     password:'0000',
-    database:'gooddrive'
+    database:'gooddrive',
+    port:'3306'
 }
