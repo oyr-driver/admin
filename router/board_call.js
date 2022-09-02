@@ -299,21 +299,43 @@ router.get('/auth', (req, res) => {
         res.render('auth',{accessor : user, auth:result});        
     });
 })
+
 // 위도, 경도 받기
 router.post('/call/message/:id/locsubmit', (req, res)=>{
     console.log(req.body);
     const sql = "UPDATE g_call SET sLat = ?, sLong = ?, sAddr = ? WHERE callID = ?";
     connection.query(sql,[req.body.lat, req.body.lon, req.body.loc, req.params.id],(err,result,fields)=>{
         if(err) throw err;
-    })
 
+        //axios.get('http://localhost:5000/call');
+        // res.redirect('/call'); //랜더링 문제 해결해야 함!
+
+    })
 });
+
+// //data 받기
+// router.post('/call/test/:id',(req,res)=>{
+//     console.log(req.body.dataUrl);
+//     //callid req.params.id로 받아와야함
+//     //req.body
+//     const sql = "UPDATE g_call SET imgUrl = ?, imgExplain = ? WHERE callID = ?";
+//     connection.query(sql,[req.body.dataUrl, req.body.text, req.params.id],(err,result,fields)=>{
+//         if(err) throw err;
+//         res.redirect('/call');
+//     })
+//     // res.send(`<script>
+//     //             location.href='http://localhost:8080/test1';
+//     //         </script>`)
+// })
+
 // 이미지 받기 
 router.post('/call/message/:id/imgsubmit', (req, res)=>{
-    console.log(req.body);
+    console.log(req.body.dataUrl);
     const sql = "UPDATE g_call SET imgUrl = ?, imgExplain = ? WHERE callID = ?";
     connection.query(sql,[req.body.dataUrl, req.body.text, req.params.id],(err,result,fields)=>{
         if(err) throw err;
+        // res.redirect('/call');//500 내부서버 오류 해결
+
     })
 });
 module.exports = router;
