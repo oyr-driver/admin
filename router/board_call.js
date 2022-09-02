@@ -1,4 +1,5 @@
 //라우터 쪼개기, 라우터 레벨 미들웨어
+const { default: axios } = require('axios');
 const express = require('express');
 const router =  express.Router();
 
@@ -164,7 +165,7 @@ router.get('/call/:id',(req,res)=>{
     const sql = "SELECT* FROM g_call WHERE callID = ?";
     connection.query(sql, [req.params.id], function(err,result,fields){
         if(err) throw err;
-        
+        console.log(result);
         //filer하는 버튼 노출 때문에 if문 사용
         if(user.AUTH === 1 || user.AUTH === 2 ){
             res.render('call',{
@@ -299,6 +300,17 @@ router.get('/auth', (req, res) => {
     });
 })
 
+// 위도, 경도 받기
+router.post('/call/message/:id/locsubmit', (req, res)=>{
+    console.log(req.body);
+    const sql = "UPDATE g_call SET sLat = ?, sLong = ?, sAddr = ? WHERE callID = ?";
+    connection.query(sql,[req.body.lat, req.body.lon, req.body.loc, req.params.id],(err,result,fields)=>{
+        if(err) throw err;
+        //axios.get('http://localhost:5000/call');
+        // res.redirect('/call'); //랜더링 문제 해결해야 함!
+    })
+});
+
 // //data 받기
 // router.post('/call/test/:id',(req,res)=>{
 //     console.log(req.body.dataUrl);
@@ -314,18 +326,13 @@ router.get('/auth', (req, res) => {
 //     //         </script>`)
 // })
 
-
+// 이미지 받기 
 router.post('/call/message/:id/imgsubmit', (req, res)=>{
     console.log(req.body.dataUrl);
     const sql = "UPDATE g_call SET imgUrl = ?, imgExplain = ? WHERE callID = ?";
     connection.query(sql,[req.body.dataUrl, req.body.text, req.params.id],(err,result,fields)=>{
         if(err) throw err;
-        res.redirect('/call');
+        // res.redirect('/call');//500 내부서버 오류 해결
     })
-//    const sql = "UPDATE g_call SET dataUrl =?  WHERE callID = ?";
-//     connection.query(sql,[req.body, req.params.id],(err,result,fields)=>{
-//         if(err) throw err;
-//         res.redirect('/call');
-//     })
 });
 module.exports = router;

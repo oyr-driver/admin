@@ -31,8 +31,11 @@ app.set('views','./views');
 app.set('view engine', 'ejs');
 
 //미들웨어 등록
-app.use(express.json());//req.body.user, req.body.pw 사용하기 위함 (body-parser)
-app.use(bodyParser.urlencoded({extended:false}));
+// app.use(express.json());//req.body.user, req.body.pw 사용하기 위함 (body-parser)
+// app.use(bodyParser.urlencoded({extended:false}));
+
+app.use(bodyParser.json({limit:"50mb"}));//limit 50mb로 늘림
+app.use(bodyParser.urlencoded({limit:"50mb", extended:true}));
 
 app.use(express.static("assets"));
 app.use(express.static("public"));
