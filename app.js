@@ -18,7 +18,9 @@ const connection = mysql.createConnection(dbconfig);
 
 const app = express();
 const server = http.createServer(app);
-const port = 5000;
+const hostname = '13.125.138.249';
+const port = 3010;
+//const port = 5000;
 
 // 클라이언트 접근 허용
 const cors = require('cors')
@@ -36,6 +38,7 @@ app.set('view engine', 'ejs');
 
 app.use(bodyParser.json({limit:"50mb"}));//limit 50mb로 늘림
 app.use(bodyParser.urlencoded({limit:"50mb", extended:true}));
+
 
 app.use(express.static("assets"));
 app.use(express.static("public"));
