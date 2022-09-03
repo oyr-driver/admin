@@ -311,6 +311,7 @@ router.post('/call/message/:id/locsubmit', (req, res)=>{
         // res.redirect('/call'); //랜더링 문제 해결해야 함!
 
     })
+    res.setHeader("Access-Control-Allow-Origin",'https://u.goodde.kr');
 });
 
 // //data 받기
@@ -337,6 +338,7 @@ router.post('/call/message/:id/imgsubmit', (req, res)=>{
         // res.redirect('/call');//500 내부서버 오류 해결
 
     })
+    res.setHeader("Access-Control-Allow-Origin",'https://u.goodde.kr');
 });
 
 router.post('/call/message/:id/textsubmit', (req, res)=>{
@@ -347,5 +349,6 @@ router.post('/call/message/:id/textsubmit', (req, res)=>{
         // res.redirect('/call');//500 내부서버 오류 해결
 
     })
+    res.setHeader("Access-Control-Allow-Origin",'https://u.goodde.kr');
 })
 module.exports = router;
