@@ -18,14 +18,14 @@ const connection = mysql.createConnection(dbconfig);
 
 const app = express();
 const server = http.createServer(app);
-const hostname = '13.125.138.249';
-const port = 3010;
+//const hostname = '13.125.138.249';
+const port = 80;
 //const port = 5000;
 
 // 클라이언트 접근 허용
 const cors = require('cors')
 
-app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+app.use(cors({ credentials: true, origin: "http://goodde.kr:3000" }));
 //{ credentials: true, origin: "http://localhost:3000" }
 
 //view engine setup
