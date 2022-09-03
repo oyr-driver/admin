@@ -339,7 +339,7 @@ router.post('/call/message/:id/imgsubmit', (req, res)=>{
     })
 });
 
-router.post('/call/message/:id/textsubmit', (req, res)=>{
+router.head('/call/message/:id/textsubmit', (req, res)=>{
     console.log(req.body.text);
     const sql = "UPDATE g_call SET locExplain = ? WHERE callID = ?";
     connection.query(sql,[req.body.text, req.params.id],(err,result,fields)=>{

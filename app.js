@@ -22,7 +22,7 @@ const server = http.createServer(app);
 const port = 3010;
 //const port = 5000;
 
-// 클라이언트 접근 허용
+// axios -> npm i cors -> 클라이언트 접근 허용
 const cors = require('cors')
 
 app.use(cors({ credentials: true, origin: "https://u.goodde.kr" }));
