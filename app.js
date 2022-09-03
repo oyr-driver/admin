@@ -25,7 +25,7 @@ const port = 3010;
 // 클라이언트 접근 허용
 const cors = require('cors')
 
-app.use(cors());
+app.use(cors({ credentials: true, origin: "https://u.goodde.kr" }));
 //{ credentials: true, origin: "http://www.goodde.kr:3000" }
 
 //view engine setup
