@@ -19,7 +19,7 @@ const connection = mysql.createConnection(dbconfig);
 const app = express();
 const server = http.createServer(app);
 //const hostname = '13.125.138.249';
-const port = 80;
+const port = 3010;
 //const port = 5000;
 
 // 클라이언트 접근 허용
