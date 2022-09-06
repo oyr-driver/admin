@@ -18,6 +18,7 @@ module.exports = {
         secretKey: required("NCP_SENS_SECRET"),
         serviceId: required("NCP_SENS_ID"),
         callNumber: required("NCP_SENS_NUMBER"),
+        userUrl: required("USER_URL"),
     },
 };
 
