@@ -338,7 +338,7 @@ router.post('/call/message/:id/imgsubmit', (req, res)=>{
         // res.redirect('/call');//500 내부서버 오류 해결
 
     })
-    res.header("Access-Control-Allow-Origin",'https://u.goodde.kr');
+    //res.header("Access-Control-Allow-Origin",'https://u.goodde.kr');
 });
 
 router.post('/call/message/:id/textsubmit', (req, res)=>{
@@ -349,6 +349,6 @@ router.post('/call/message/:id/textsubmit', (req, res)=>{
         // res.redirect('/call');//500 내부서버 오류 해결
 
     })
-    res.header("Access-Control-Allow-Origin",'https://u.goodde.kr');
+    //res.header("Access-Control-Allow-Origin",'https://u.goodde.kr');
 })
 module.exports = router;
