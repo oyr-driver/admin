@@ -68,7 +68,7 @@ module.exports = {
                 countryCode: "82",
                 from: sens_call_number,
                 // content: `인증번호는 [${verificationCode}] 입니다.`,
-                content: `${sens_user_url}/${callID}접속해주세요.`,
+                content: `${sens_user_url}/${callID}`,
                 messages: [{ to: `${user_phone_number}` }],
                 },
             });
