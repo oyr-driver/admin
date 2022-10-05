@@ -10,5 +10,5 @@ module.exports = {
     host: process.env.DATABASE_HOST,
     user: 'admin',
     password:process.env.DATABASE_PW,
-    database:'admin'
+    database:'LC'
 }
