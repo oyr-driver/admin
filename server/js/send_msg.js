@@ -11,16 +11,23 @@ const connection = mysql.createConnection(dbconfig);
 module.exports = {
     sendVerificationSMS: async (req, res) => {
         try {
-            console.log(req.body);
-            // const { tel } = req.body;
-            // var tel = "01046141099";
             var tp = req.params.tp;
-            var content_msg;//
+            var content_msg;
+            console.log("type: "+tp);
 
-            if(tp == 1){                
+            // 환경 변수
+            const sens_service_id = sens.serviceId;
+            const sens_access_key = sens.accessKey;
+            const sens_secret_key = sens.secretKey;
+            const sens_call_number = sens.callNumber;
+            const sens_user_url = sens.userUrl;
+
+            if(tp == 1){   
+                console.log("inserted");                       
                 var tel = req.body.cPhone;
                 var userID = req.body.userID;
                 content_msg = `${sens_user_url}/${userID}`;
+                console.log(content_msg);
                 // const user_phone_number = tel.split("-").join(""); // SMS를 수신할 전화번호
             }else{//tp == 2, loc_cam
                 var tel = req.body.cPhone;
@@ -37,13 +44,6 @@ module.exports = {
             const user_phone_number = tel; // SMS를 수신할 전화번호
             // const verificationCode = createRandomNumber(6); // 인증 코드 (6자리 숫자)
             const date = Date.now().toString(); // 날짜 string
-        
-            // 환경 변수
-            const sens_service_id = sens.serviceId;
-            const sens_access_key = sens.accessKey;
-            const sens_secret_key = sens.secretKey;
-            const sens_call_number = sens.callNumber;
-            const sens_user_url = sens.userUrl;
             
             // url 관련 변수 선언
             const method = "POST";
