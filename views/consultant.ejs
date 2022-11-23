@@ -27,6 +27,36 @@
     <link href="/css/create_new.css" rel="stylesheet">
 </head>
 
+<style>
+    #pagingul {
+    text-align: center;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-right: 0;
+    }
+
+    #pagingul li {
+        text-align: center;
+        float: left;
+    }
+
+    #pagingul li a {
+        display: block;
+        font-size: 14px;
+        padding: 9px 12px;
+        border-right: solid 1px #ccc;
+        box-sizing: border-box;
+    }
+
+    #pagingul li.on {
+        background: #eda712;
+    }
+
+    #pagingul li.on a {
+        color: #fff;
+    }
+</style>
+
 <body style="overflow: hidden;">
     <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
         <div class="app-header header-shadow">
@@ -155,13 +185,25 @@
                                 <li  class="mm-active" >
                                     <a href="/auth">
                                         <i class="metismenu-icon pe-7s-display2"></i>
-                                        auth
+                                        auth & disaster
                                     </a>
                                 </li>
                                 <li  class="mm-active" >
-                                    <a href="/call">
-                                        <i class="metismenu-icon pe-7s-call"></i>
-                                        Call
+                                    <a href="/call_user">
+                                        <i class="metismenu-icon pe-7s-add-user"></i>
+                                        USER
+                                    </a>
+                                </li>
+                                <li  class="mm-active" >
+                                    <a href="/call_loc">
+                                        <i class="metismenu-icon pe-7s-map-marker"></i>
+                                        Call_Loc
+                                    </a>
+                                </li>
+                                <li  class="mm-active" >
+                                    <a href="/call_cam">
+                                        <i class="metismenu-icon pe-7s-camera"></i>
+                                        Call_Cam
                                     </a>
                                 </li>
                                 <li class="mm-active">
@@ -328,6 +370,7 @@
                                     </ul>
                                 </nav>
                             </div>
+
                         </div>
                         <div class="create_area" id="create_area"> 
                             <div class="tab-pane tabs-animation " id="tab-content-1" role="tabpanel">
@@ -477,6 +520,14 @@
     </div>
 
     <script>
+
+    //페이징 구현
+    const totalData = "<% locals.consultant.length %>";
+    const dataList = "<% locals.consultant; %>";
+
+    console.log(totalData);
+    console.log(1);
+
     function getShow(){
         document.getElementById("create_area").style.display = "block";
         document.getElementById("create_area").style.right = "0px";
@@ -517,6 +568,7 @@
             }
         }
     }
+    
     </script>
 
 <script type="text/javascript" src="/scripts/main.js"></script>

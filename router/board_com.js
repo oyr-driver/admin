@@ -18,7 +18,7 @@ router.get('/company/com', (req, res) => {
     user.ID = req.session.users.user_ID;
     user.PW = req.session.users.user_PW;
     user.CP = req.session.users.user_CP;
-    connection.query('SELECT * FROM g_consultant WHERE conID = ?',[user.ID], function(error, result_user){
+    connection.query('SELECT * FROM LC_consultant WHERE conID = ?',[user.ID], function(error, result_user){
         if(error) throw error;
         user.AUTH = result_user[0].authCD;
         user.NAME = result_user[0].cpNM;
@@ -27,7 +27,7 @@ router.get('/company/com', (req, res) => {
         if(user.AUTH === 1){
             //super관리자 전체 노출
             //crud기능 다됨
-            const sql_1 = "SELECT * FROM g_company";
+            const sql_1 = "SELECT * FROM LC_company";
             connection.query(sql_1,(err, result,field)=>{
                 if(err) throw err;
                 // console.log(result);
@@ -43,7 +43,7 @@ router.get('/company/com', (req, res) => {
         else if(user.AUTH === 2){
             //관리자 해당 회사 정보만 노출
             //create기능안됨/ edit에서 delete, cpID 정보 교체 안됨
-            const sql_2 = "SELECT * FROM g_company where cpID=?";
+            const sql_2 = "SELECT * FROM LC_company where cpID=?";
             connection.query(sql_2,[user.CP],(err, result,field)=>{
                 if(err) throw err;
                 // console.log(result);
@@ -75,7 +75,7 @@ router.post('/company/com',(req,res)=>{
     connection.query('SELECT SUBSTR(MD5(RAND()),1,8) AS RandomString', (err, result, fields)=>{
         console.log(result[0].RandomString)
         req.body.cpID = result[0].RandomString //cpID로 랜덤 문자열 배정 
-        const sql = "INSERT INTO g_company SET ?"
+        const sql = "INSERT INTO LC_company SET ?"
         connection.query(sql,req.body, (err,result,fields)=>{
             if(err) throw err;
             console.log("회사 추가: "+result);
@@ -86,7 +86,7 @@ router.post('/company/com',(req,res)=>{
 
 //-edit파일로 이동
 router.get('/company/com/:id',(req,res)=>{
-    const sql = "SELECT* FROM g_company WHERE cpID = ?";
+    const sql = "SELECT* FROM LC_company WHERE cpID = ?";
     connection.query(sql, [req.params.id], function(err,result,fields){
         if(err) throw err;
         console.log("회사 접속 직원 id 접속 : "+req.params.id);
@@ -113,7 +113,7 @@ router.get('/company/com/:id',(req,res)=>{
 
 //-company 수정
 router.post('/company/com/update/:id',(req,res)=>{
-    const sql = "UPDATE g_company SET ? WHERE cpID = ?";
+    const sql = "UPDATE LC_company SET ? WHERE cpID = ?";
     connection.query(sql,[req.body, req.params.id],(err,result,fields)=>{
         if(err) throw err;
         res.redirect('/company/com');
@@ -122,7 +122,7 @@ router.post('/company/com/update/:id',(req,res)=>{
 
 //-company 삭제
 router.get('/company/com/delete/:id',(req,res)=>{
-    const sql = "DELETE FROM g_company WHERE cpID = ?";
+    const sql = "DELETE FROM LC_company WHERE cpID = ?";
     connection.query(sql,[req.params.id],(err,result,fields)=>{
         if(err) throw err;
         console.log("회사 접속 직원 id 삭제 : "+req.params.id);

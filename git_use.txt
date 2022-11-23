@@ -1,6 +1,14 @@
 //브랜치 이동
 git checkout -v [브랜치]
 
+//새로운 브랜치 생성 후 코드 push
+1. 브랜치 생성 후 해당 브랜치로 이동
+git add .
+git commit -m "message작성"
+git push origin [생성 브랜치] //해당 git주소에 코드 올라감
+git push
+
+
 //파일 push
 git add .
 git commit -m "원하는 내용"

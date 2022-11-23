@@ -288,7 +288,7 @@ router.post('/call/filter',(req,res)=>{
 //메세지 전송 기능
 //res,req는 왜 안될까? ==> (req,res) => {(req,res)} 형태로 존재하게 됨 그래서 작동 안함
 // router.get('/call/message/:id',sendVerificationSMS,);
-router.post('/call/message/:id',sendVerificationSMS,);
+router.post('/call/message/:id',sendVerificationSMS);
 
 //auth 데이터 불러오기
 router.get('/auth', (req, res) => {
@@ -311,7 +311,6 @@ router.post('/call/message/:id/locsubmit', (req, res)=>{
         // res.redirect('/call'); //랜더링 문제 해결해야 함!
 
     })
-    res.header("Access-Control-Allow-Origin",'https://u.goodde.kr');
 });
 
 // //data 받기
@@ -338,7 +337,6 @@ router.post('/call/message/:id/imgsubmit', (req, res)=>{
         // res.redirect('/call');//500 내부서버 오류 해결
 
     })
-    res.header("Access-Control-Allow-Origin",'https://u.goodde.kr');
 });
 
 router.post('/call/message/:id/textsubmit', (req, res)=>{
@@ -349,6 +347,5 @@ router.post('/call/message/:id/textsubmit', (req, res)=>{
         // res.redirect('/call');//500 내부서버 오류 해결
 
     })
-    res.header("Access-Control-Allow-Origin",'https://u.goodde.kr');
 })
 module.exports = router;

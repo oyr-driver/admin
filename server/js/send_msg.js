@@ -14,9 +14,26 @@ module.exports = {
             console.log(req.body);
             // const { tel } = req.body;
             // var tel = "01046141099";
-            var tel = req.body.cPhone;
-            var callID = req.body.callID;
-            // const user_phone_number = tel.split("-").join(""); // SMS를 수신할 전화번호
+            var tp = req.params.tp;
+            var content_msg;//
+
+            if(tp == 1){                
+                var tel = req.body.cPhone;
+                var userID = req.body.userID;
+                content_msg = `${sens_user_url}/${userID}`;
+                // const user_phone_number = tel.split("-").join(""); // SMS를 수신할 전화번호
+            }else{//tp == 2, loc_cam
+                var tel = req.body.cPhone;
+                var userID = req.body.userID;
+                var type = req.body.type;
+
+                //connection disaster 행동 요령 저장 필요함
+                connection.query('SELECT * FROM LC_disaster WHERE type_num = ?',[type],function(err,result){
+                    // result.guide
+                    content_msg = result.guide;
+                })
+            }
+
             const user_phone_number = tel; // SMS를 수신할 전화번호
             // const verificationCode = createRandomNumber(6); // 인증 코드 (6자리 숫자)
             const date = Date.now().toString(); // 날짜 string
@@ -27,7 +44,7 @@ module.exports = {
             const sens_secret_key = sens.secretKey;
             const sens_call_number = sens.callNumber;
             const sens_user_url = sens.userUrl;
-        
+            
             // url 관련 변수 선언
             const method = "POST";
             const space = " ";
@@ -43,7 +60,6 @@ module.exports = {
             hmac.update(newLine);
             hmac.update(date);
             hmac.update(newLine);
-            console.log(sens_access_key);
             hmac.update(sens_access_key);
             const hash = hmac.finalize();
             const signature = hash.toString(CryptoJS.enc.Base64);
@@ -63,32 +79,43 @@ module.exports = {
                 countryCode: "82",
                 from: sens_call_number,
                 // content: `인증번호는 [${verificationCode}] 입니다.`,
-                content: `${sens_user_url}/${callID}`,
+                content: `${content_msg}`,
                 messages: [{ to: `${user_phone_number}`}],
                 },
-            });
+            });    
+            // const smsRes = await axios({
+            //     method: method,
+            //     url: url,
+            //     headers: {
+            //     "Content-type": "application/json; charset=utf-8",
+            //     "x-ncp-iam-access-key": sens_access_key,
+            //     "x-ncp-apigw-timestamp": date,
+            //     "x-ncp-apigw-signature-v2": signature,
+            //     },
+            //     data: {
+            //     type: "SMS",
+            //     countryCode: "82",
+            //     from: sens_call_number,
+            //     // content: `인증번호는 [${verificationCode}] 입니다.`,
+            //     content: `${sens_user_url}/${userID}`,
+            //     messages: [{ to: `${user_phone_number}`}],
+            //     },
+            // });
             
             console.log("response", smsRes.data);
-            // return res.status(200).json({ message: "SMS sent" });
-            // return res.redirect('/call');
-            
-            // const sql = "UPDATE g_call SET status='2' WHERE callID = ?";
-            // connection.query(sql,[req.body.callID],(err,result,fields)=>{
-            //     if(err) throw err;
-            // })
             return res.send(`<script>
                                 alert('${user_phone_number} 메세지 전송 성공');
-                                location.href='/call';
+                                location.href='/call_user';
                                 //status 2로 변환 필요
                             </script>`
                             );
         }
         catch (err) {
-            console.log(err);
+            console.log(err.response);
             // return res.status(404).json({ message: "SMS not sent" });
             return res.send(`<script>
-                                alert('${user_phone_number} 메세지 전송 실패');
-                                location.href='/call';
+                                alert('메세지 전송 실패');
+                                location.href='/call_user';
                             </script>`
                             );
         }
